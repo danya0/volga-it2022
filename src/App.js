@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState} from 'react'
 
 function App() {
+  const [isContainSource, setIsContainsSource] = useState(false)
+
+  useEffect(() => {
+    const root = document.querySelector('#glasses-quiz-widget')
+
+    if (root.dataset.source) {
+      setIsContainsSource(true)
+    }
+  }, [])
+
+  const NoSource = () => (
+      <h1>The element does not contain the "data-source" attribute</h1>
+  )
+
+  const WidgetBody = () => (
+      <div>Widget</div>
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <>
+        {
+          isContainSource
+              ? <WidgetBody/>
+              : <NoSource/>
+        }
+      </>
+  )
 }
 
 export default App;
