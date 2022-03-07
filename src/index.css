@@ -1,7 +1,4 @@
-body {
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+.widget {
+    font-family: OpenSans, sans-serif;
 }

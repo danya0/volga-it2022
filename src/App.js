@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Widget from './components/Widget'
 
 function App() {
   const [isContainSource, setIsContainsSource] = useState(false)
@@ -15,15 +16,17 @@ function App() {
       <h1>The element does not contain the "data-source" attribute</h1>
   )
 
-  const WidgetBody = () => (
-      <div>Widget</div>
+  const WidgetBody = ({...props}) => (
+      <div {...props}>
+        <Widget/>
+      </div>
   )
 
   return (
       <>
         {
           isContainSource
-              ? <WidgetBody/>
+              ? <WidgetBody className="widget"/>
               : <NoSource/>
         }
       </>
