@@ -53,7 +53,7 @@ const Counter = styled.div`
   line-height: 19px;
 `
 
-const Header = ({inProgress = true, close}) => {
+const Header = ({inProgress, close}) => {
   if (inProgress) {
     return (
         <HeaderWrap>
