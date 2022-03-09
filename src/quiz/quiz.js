@@ -1,7 +1,6 @@
-import frameSizeImg from './img/quiz4/frame_size.png'
-
 export const quiz = [
   {
+    quizId: 1,
     optionName: 'gender',
     title: 'You are looking for',
     answers: [
@@ -20,6 +19,7 @@ export const quiz = [
   },
 
   {
+    quizId: 2,
     optionName: 'eyewear_type',
     title: 'What type of glasses are you looking for?',
     answers: [
@@ -38,6 +38,7 @@ export const quiz = [
   },
 
   {
+    quizId: 3,
     optionName: 'lenstype',
     previewPageTitle: 'Let\'s get to know you!',
     title: 'What type of glasses are you looking for?',
@@ -75,9 +76,10 @@ export const quiz = [
   },
 
   {
+    quizId: 4,
     optionName: 'frame_size',
     title: 'What’s your current frame size?',
-    image: frameSizeImg,
+    image: null,
     answerOption: {
       oneRow: true
     },
@@ -122,6 +124,7 @@ export const quiz = [
   },
 
   {
+    quizId: 5,
     optionName: 'protect_eyes',
     title: 'Would you like to protect your eyes from light emanating from screens?',
     answers: [
@@ -162,6 +165,7 @@ export const quiz = [
   },
 
   {
+    quizId: 6,
     optionName: 'face_type',
     title: 'Every face shape has a perfect fit. What’s yours?',
     answers: [
@@ -185,6 +189,7 @@ export const quiz = [
   },
 
   {
+    quizId: 7,
     optionName: 'facial_feature',
     title: 'How would you define your facial features?',
     answers: [
@@ -205,6 +210,7 @@ export const quiz = [
   },
 
   {
+    quizId: 8,
     optionName: 'frame_style',
     title: 'Which frame style are you looking for?',
     subtitle: 'You can pick more than one.',
@@ -262,6 +268,7 @@ export const quiz = [
   },
 
   {
+    quizId: 9,
     optionName: 'particular_brands',
     title: 'Are you looking for any particular eyewear brands?',
     answers: [
@@ -277,6 +284,7 @@ export const quiz = [
   },
 
   {
+    quizId: 10,
     optionName: 'brands',
     title: 'Choose your favorite brands',
     subtitle: 'You can pick more than one.',

@@ -4,7 +4,7 @@ import {mainDarkColor} from '../constants/styledConstats'
 import Preview from './Preview'
 import Header from './Header'
 import Quiz from './Quiz/Quiz'
-import {quiz} from '../quiz'
+import {quiz} from '../quiz/quiz'
 
 const StyledWidget = styled.div`
   margin: 0 auto;
