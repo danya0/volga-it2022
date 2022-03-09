@@ -4,6 +4,7 @@ import {mainDarkColor} from '../constants/styledConstats'
 import Preview from './Preview'
 import Header from './Header'
 import Quiz from './Quiz/Quiz'
+import {quiz} from '../quiz'
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -22,7 +23,7 @@ const Widget = () => {
       <StyledWidget>
         <Header/>
         {/*<Preview/>*/}
-        <Quiz/>
+        <Quiz quiz={quiz[7]}/>
       </StyledWidget>
   )
 }

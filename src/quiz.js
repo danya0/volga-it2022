@@ -1,3 +1,5 @@
+import frameSizeImg from './img/quiz4/frame_size.png'
+
 export const quiz = [
   {
     optionName: 'gender',
@@ -74,6 +76,8 @@ export const quiz = [
 
   {
     optionName: 'frame_size',
+    title: 'What’s your current frame size?',
+    image: frameSizeImg,
     answerOption: {
       oneRow: true
     },

@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Roboto&display=swap');
 .widget {
-    font-family: OpenSans, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.widget h1, h2, h3, p {
+.widget h1, h2, h3, h4, p {
     margin: 0;
     padding: 0;
 }
