@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 const StyledButton = styled.button`
   position: relative;
@@ -46,9 +46,9 @@ const StyledButton = styled.button`
   }
 `
 
-const Button = ({children}) => {
+const Button = ({children, ...props}) => {
   return (
-      <StyledButton data-text={children}>
+      <StyledButton data-text={children} {...props}>
         {children}
       </StyledButton>
   )

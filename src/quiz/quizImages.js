@@ -3,7 +3,7 @@ import men from '../img/quiz1/men.svg'
 import women from '../img/quiz1/women.svg'
 // quiz 2
 import menEyeglasses from '../img/quiz2/men_eyeglasses.svg'
-import menSunglasses from '../img/quiz2/men_sunglasses.svg.svg'
+import menSunglasses from '../img/quiz2/men_sunglasses.svg'
 import womenEyeglasses from '../img/quiz2/women_eyeglasses.svg'
 import womenSunglasses from '../img/quiz2/women_sunglasses.svg'
 // quiz 4

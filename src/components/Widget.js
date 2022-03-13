@@ -21,9 +21,9 @@ const StyledWidget = styled.div`
 const Widget = () => {
   return (
       <StyledWidget>
-        <Header/>
+        <Header inProgress/>
         {/*<Preview/>*/}
-        <Quiz quiz={quiz[7]}/>
+        <Quiz quiz={quiz[8]}/>
       </StyledWidget>
   )
 }

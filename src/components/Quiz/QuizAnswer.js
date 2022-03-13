@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 
 const StyledQuizAnswer = styled.div`
@@ -42,6 +42,12 @@ const Text = styled.p`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
+  
+  ${props => props.small ? css`
+    font-size: 13.72px;
+    line-height: 14px;
+    margin-bottom: 13px;
+  `: null}
 `
 
 const OneRowText = styled.p`
@@ -59,26 +65,38 @@ const Divider = styled.div`
 `
 
 const StyledQuizImage = styled.div`
-  margin-bottom: ${props => props.oneRow ? 'none' : '15px'};
+  margin-bottom: ${props => props.oneRow ? 'none' : props.smallBottom ? '8px' : '15px'};
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-const QuizAnswer = ({image, oneRow, oneRowText, children}) => {
+const QuizAnswer = ({answer, oneRow, checkedType, children}) => {
+  const [checked, setChecked] = useState(false)
+
+  const toggleChecked = () => setChecked(!checked)
+
+  const {image, oneRowText} = answer
+
   const imageItem = image
       ?
-      <StyledQuizImage oneRow={oneRow}>
+      <StyledQuizImage smallBottom={checkedType} oneRow={oneRow}>
         <img src={image} alt="quiz-answer"/>
       </StyledQuizImage>
       :
       null
 
+  // todo: обработка состояния checked
+
   return (
-      <StyledQuizAnswer oneRow={oneRow} oneRowText={oneRowText}>
+      <StyledQuizAnswer
+          oneRow={oneRow}
+          oneRowText={oneRowText}
+          onClick={!checkedType ? null : toggleChecked}
+      >
         {imageItem}
         {oneRow && !oneRowText ? <Divider/> : null}
-        <Text>{children}</Text>
+        {children ? <Text small={checkedType}>{children}</Text> : null}
         {oneRowText ? <OneRowText>{oneRowText}</OneRowText> : null}
       </StyledQuizAnswer>
   )

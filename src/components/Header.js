@@ -9,7 +9,7 @@ import ProgressBar from './UI/ProgressBar'
 const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
-  height: 66px;
+  height: 80px;
   
   & * > {
     width: 100%;

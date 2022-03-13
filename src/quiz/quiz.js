@@ -1,3 +1,5 @@
+import {quizImages} from './quizImages'
+
 export const quiz = [
   {
     quizId: 1,
@@ -7,12 +9,12 @@ export const quiz = [
       {
         id: 5,
         name: 'Women\'s Styles',
-        image: null
+        image: quizImages.quiz1.women
       },
       {
         id: 4,
         name: 'Men\'s Styles',
-        image: null
+        image: quizImages.quiz1.men
       }
     ],
     underText: 'I\'d like to see both'
@@ -26,12 +28,18 @@ export const quiz = [
       {
         id: 210,
         name: 'Eyeglasses',
-        image: null
+        image: {
+          men: quizImages.quiz2.menEyeglasses,
+          women: quizImages.quiz2.womenEyeglasses
+        }
       },
       {
         id: 211,
-        name: 'Men\'s Styles',
-        image: null
+        name: 'Sunglasses',
+        image: {
+          men: quizImages.quiz2.menSunglasses,
+          women: quizImages.quiz2.womenSunglasses
+        }
       }
     ],
     underText: 'I want to see both'
@@ -79,7 +87,7 @@ export const quiz = [
     quizId: 4,
     optionName: 'frame_size',
     title: 'What’s your current frame size?',
-    image: null,
+    image: quizImages.quiz4.frameSize,
     answerOption: {
       oneRow: true
     },
@@ -147,17 +155,17 @@ export const quiz = [
         {
           id: 1,
           name: 'Dark Shade',
-          image: null
+          image: quizImages.quiz5.darkShade
         },
         {
           id: 2,
           name: 'Light Shade',
-          image: null
+          image: quizImages.quiz5.lightShade
         },
         {
           id: 3,
           name: 'Transitioning Shade',
-          image: null
+          image: quizImages.quiz5.transitionShade
         },
       ]
     },
@@ -172,17 +180,29 @@ export const quiz = [
       {
         id: 1,
         name: 'I have a long face',
-        image: null
+        image: {
+          men: quizImages.quiz6.menLong,
+          women: quizImages.quiz6.womenLong,
+          noGender: quizImages.quiz6.nogenLong
+        }
       },
       {
         id: 2,
         name: 'I have a round face',
-        image: null
+        image: {
+          men: quizImages.quiz6.menRound,
+          women: quizImages.quiz6.womenRound,
+          noGender: quizImages.quiz6.nogenRound
+        }
       },
       {
         id: 3,
         name: 'In between',
-        image: null
+        image: {
+          men: quizImages.quiz6.menBetween,
+          women: quizImages.quiz6.womenBetween,
+          noGender: quizImages.quiz6.nogenBetween
+        }
       }
     ],
     underText: 'I don’t know'
@@ -221,50 +241,49 @@ export const quiz = [
       {
         id: 1,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 2,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 3,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 4,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 5,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 6,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 7,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 8,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
       {
         id: 9,
         name: 'Rectangle',
-        image: null
+        image: quizImages.quiz8.fs1
       },
-    ],
-    underText: 'I don’t know'
+    ]
   },
 
   {
@@ -294,41 +313,40 @@ export const quiz = [
     answers: [
       {
         id: 1,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 2,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 3,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 4,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 5,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 6,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 7,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 8,
-        image: null
+        image: quizImages.quiz10.brand1
       },
       {
         id: 9,
-        image: null
+        image: quizImages.quiz10.brand1
       },
-    ],
-    underText: 'I don’t know'
+    ]
   },
 ]
