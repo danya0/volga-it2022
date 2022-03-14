@@ -2,6 +2,7 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
+import QuizAnswerChecked from './QuizAnswerChecked'
 
 const QuizTitle = styled.h3`
   color: #0F0F0F;
@@ -17,8 +18,8 @@ const QuizSubtitle = styled.p`
   line-height: 30px;
   text-align: center;
   color: #697580;
-  
-  ${props => props.mb ? 'margin-bottom: 26px' : null};
+
+  ${props => props.mb ? 'margin-bottom: 11px' : null};
 `
 
 const StyledQuiz = styled.div`
@@ -28,7 +29,7 @@ const StyledQuiz = styled.div`
   padding-bottom: 25px;
   ${props => {
     const padding = props.ifChecked ? '13px' : props.twoAnswer ? '50px' : '30px'
-    
+
     return css`
       padding-left: ${padding};
       padding-right: ${padding};
@@ -49,8 +50,8 @@ const QuizPlaceWrap = styled.div`
     overflow-x: scroll;
   ` : 'display: flex'};
   flex-grow: 1;
-  
-  
+
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -58,7 +59,7 @@ const QuizPlaceWrap = styled.div`
 
 const QuizPlace = styled.div`
   flex-grow: 1;
-  
+
   ${props => !props.grid ? css`
     max-height: 300px;
     display: flex;
@@ -68,20 +69,21 @@ const QuizPlace = styled.div`
     & > * {
       flex-grow: 1;
       margin-bottom: 15px;
+
       &:last-child {
         margin-bottom: 0;
       }
     }
   ` : css`
+    padding: 15px 12px 0 12px;
     height: fit-content;
     width: fit-content;
-    padding: 0 12px;
     display: grid;
     grid-template: repeat(3, 103px) / repeat(3, 160px);
     grid-gap: 10px;
   `}
-  
-  
+
+
 `
 
 const SkipButton = styled.div`
@@ -95,34 +97,63 @@ const SkipButton = styled.div`
   text-decoration-line: underline;
 
   color: #3A4850;
-  
+
   display: ${props => props.hide ? 'none' : 'block'};
 `
 
 const Quiz = ({quiz}) => {
 
+  // a state in which the element should display text and an image on the same line
   const oneRow = quiz.answerOption?.oneRow
+  // a state where the element is of type 'checked'
   const checked = quiz.answerOption?.checked
 
   return (
-      <StyledQuiz twoAnswer={quiz.answers.length <= 2} ifChecked={checked} withSubtitle={quiz.subtitle}>
-        <QuizTitle withSubtitle={quiz.subtitle}>{quiz.title}</QuizTitle>
+      <StyledQuiz
+          // if 'twoAnswer' or 'ifChecked' need to increase wrapper paddings
+          twoAnswer={quiz.answers.length <= 2}
+          ifChecked={checked}
+          // change padding on top
+          withSubtitle={quiz.subtitle}
+      >
+        <QuizTitle withSubtitle={quiz.subtitle}>
+          {quiz.title}
+        </QuizTitle>
         {quiz.subtitle ? <QuizSubtitle mb={checked}>{quiz.subtitle}</QuizSubtitle> : null}
-
         {quiz.image ? <QuizImage src={quiz.image} alt="quiz-image"/> : null}
-
-        <QuizPlaceWrap grid={checked}>
-          <QuizPlace grid={checked}>
-            {quiz.answers.map((answer, idx) => (
-                <QuizAnswer
-                    key={idx}
-                    oneRow={oneRow}
-                    checkedType={checked}
-                    answer={answer}
-                >
-                  {answer.name}
-                </QuizAnswer>
-            ))}
+        <QuizPlaceWrap
+            // creates negative margin padding
+            grid={checked}
+        >
+          <QuizPlace
+              // display: grid (To display 'checked' elements)
+              grid={checked}
+          >
+            {quiz.answers.map((answer, idx) => {
+              // depending on the type of question, select the correct element
+              if (checked) {
+                return (
+                    <QuizAnswerChecked
+                      key={idx}
+                      checkedType={checked}
+                      answer={answer}
+                    >
+                      {answer.name}
+                    </QuizAnswerChecked>
+                )
+              } else {
+                return (
+                    <QuizAnswer
+                        key={idx}
+                        oneRow={oneRow}
+                        checkedType={checked}
+                        answer={answer}
+                    >
+                      {answer.name}
+                    </QuizAnswer>
+                )
+              }
+            })}
           </QuizPlace>
         </QuizPlaceWrap>
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 
-const StyledQuizAnswer = styled.div`
+export const StyledQuizAnswer = styled.div`
   background: #FFFFFF;
   border: 1px solid rgba(231, 235, 237, 0.80141);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
@@ -19,7 +19,7 @@ const StyledQuizAnswer = styled.div`
   &:hover {
     transform: scale(1.05);
   }
-  
+
   ${props => props.oneRow ? css`
     flex-direction: row;
     align-items: center;
@@ -38,16 +38,16 @@ const StyledQuizAnswer = styled.div`
   ` : null};
 `
 
-const Text = styled.p`
+export const Text = styled.p`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
-  
+
   ${props => props.small ? css`
     font-size: 13.72px;
     line-height: 14px;
     margin-bottom: 13px;
-  `: null}
+  ` : null}
 `
 
 const OneRowText = styled.p`
@@ -65,36 +65,41 @@ const Divider = styled.div`
 `
 
 const StyledQuizImage = styled.div`
-  margin-bottom: ${props => props.oneRow ? 'none' : props.smallBottom ? '8px' : '15px'};
+  ${props => {
+    console.log('props from sqi ->', props)
+  }}
+  margin-bottom: ${props => props.noMargin ? 'none' : props.smallBottom ? '8px' : '15px'};
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
-const QuizAnswer = ({answer, oneRow, checkedType, children}) => {
-  const [checked, setChecked] = useState(false)
+export const checkImageAndInsertEl = (imgItem, props) => (
+    imgItem
+        ?
+        // smallBottom={checkedType && children} noMargin={oneRow || !children}
+        <StyledQuizImage
+            {...props}
+        >
+          <img src={imgItem} alt="quiz-answer"/>
+        </StyledQuizImage>
+        :
+        null
+)
 
-  const toggleChecked = () => setChecked(!checked)
+
+const QuizAnswer = ({answer, oneRow, checkedType, children}) => {
 
   const {image, oneRowText} = answer
 
-  const imageItem = image
-      ?
-      <StyledQuizImage smallBottom={checkedType} oneRow={oneRow}>
-        <img src={image} alt="quiz-answer"/>
-      </StyledQuizImage>
-      :
-      null
-
-  // todo: обработка состояния checked
-
   return (
       <StyledQuizAnswer
+          // display element on one line
           oneRow={oneRow}
+          // display element on one line with 'space-between'
           oneRowText={oneRowText}
-          onClick={!checkedType ? null : toggleChecked}
       >
-        {imageItem}
+        {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: oneRow || !children})}
         {oneRow && !oneRowText ? <Divider/> : null}
         {children ? <Text small={checkedType}>{children}</Text> : null}
         {oneRowText ? <OneRowText>{oneRowText}</OneRowText> : null}

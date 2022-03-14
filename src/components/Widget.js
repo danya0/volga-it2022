@@ -23,7 +23,7 @@ const Widget = () => {
       <StyledWidget>
         <Header inProgress/>
         {/*<Preview/>*/}
-        <Quiz quiz={quiz[8]}/>
+        <Quiz quiz={quiz[7]}/>
       </StyledWidget>
   )
 }
