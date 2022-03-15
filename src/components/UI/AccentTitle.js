@@ -8,9 +8,9 @@ export const StyledAccentTitle = styled.h2`
   text-align: center;
 `
 
-const AccentTitle = ({children}) => {
+const AccentTitle = ({children, ...props}) => {
   return (
-      <StyledAccentTitle>
+      <StyledAccentTitle {...props}>
         {children}
       </StyledAccentTitle>
   )

@@ -5,6 +5,7 @@ import Preview from './Preview'
 import Header from './Header'
 import Quiz from './Quiz/Quiz'
 import {quiz} from '../quiz/quiz'
+import LikeWindow from './LikeWindow'
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -23,7 +24,8 @@ const Widget = () => {
       <StyledWidget>
         <Header inProgress/>
         {/*<Preview/>*/}
-        <Quiz quiz={quiz[7]}/>
+        {/*<Quiz quiz={quiz[7]}/>*/}
+        <LikeWindow>No worries, we’ve got you!</LikeWindow>
       </StyledWidget>
   )
 }
