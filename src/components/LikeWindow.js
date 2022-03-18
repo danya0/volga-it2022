@@ -4,6 +4,7 @@ import styled, {keyframes} from 'styled-components'
 import likeSvg from '../img/likeWindow/like.svg'
 import star1 from '../img/likeWindow/star1.svg'
 import star2 from '../img/likeWindow/star2.svg'
+import Circle from './UI/Circle'
 
 const LikeWindowWrap = styled.div`
   display: flex;
@@ -11,17 +12,6 @@ const LikeWindowWrap = styled.div`
   align-items: center;
   
   padding: 100px 15px 0 15px;
-`
-
-const Circle = styled.div`
-  position: relative;
-  width: 131.52px;
-  height: 131.52px;
-  border-radius: 50%;
-  background: #F7F8F9;
-  box-shadow: -9px -9px 16px #FFFFFF, 9px 9px 16px rgba(163, 177, 198, 0.325148);
-  
-  margin-bottom: 40px;  
 `
 
 const likeAnim = keyframes`
@@ -62,10 +52,12 @@ const LikeWindow = ({children}) => {
       <LikeWindowWrap>
         <Circle>
           <Image bg={likeSvg}/>
+          {/* little star 1 */}
           <Star style={{
             left: 31,
             top: 43
           }} bg={star1}/>
+          {/* little star 2 */}
           <Star style={{
             left: 74,
             top: 28

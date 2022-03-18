@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.03);
   border-radius: 24px;
   color: transparent;
-  padding: 13px 48px;
+  padding: 13px ${props => props.xPadding ? props.xPadding + 'px' : '48px'};
 
   font-family: 'Roboto', sans-serif;
   font-style: normal;
@@ -46,9 +46,9 @@ const StyledButton = styled.button`
   }
 `
 
-const Button = ({children, ...props}) => {
+const Button = ({children, xPadding, ...props}) => {
   return (
-      <StyledButton data-text={children} {...props}>
+      <StyledButton xPadding={xPadding} data-text={children} {...props}>
         {children}
       </StyledButton>
   )
