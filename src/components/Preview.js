@@ -22,13 +22,13 @@ const ThisAccentTitle = styled(StyledAccentTitle)`
   margin-bottom: 25px;
 `
 
-const Preview = () => {
+const Preview = ({startEvent}) => {
   return (
       <StyledPreview>
         <Image src={PreviewImg} alt="preview"/>
         <ThisAccentTitle>Let’s find your perfect pair!</ThisAccentTitle>
         <SubAccentTitle>Take the quiz to easily discover your perfect fit from thousands of styles</SubAccentTitle>
-        <Button>Start Now</Button>
+        <Button onClick={startEvent}>Start Now</Button>
       </StyledPreview>
   )
 }

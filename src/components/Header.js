@@ -53,13 +53,13 @@ const Counter = styled.div`
   line-height: 19px;
 `
 
-const Header = ({inProgress, close}) => {
+const Header = ({inProgress, progress, close, prev}) => {
   if (inProgress) {
     return (
         <HeaderWrap>
           <StyledHeader>
-            <BackBtn/>
-            <Counter>1/10</Counter>
+            <BackBtn onClick={prev}/>
+            <Counter>{progress}/10</Counter>
             <CloseBtn/>
           </StyledHeader>
           <ProgressBar current={1} max={10}/>

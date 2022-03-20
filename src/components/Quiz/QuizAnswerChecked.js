@@ -25,7 +25,7 @@ const Flag = styled.div`
   align-items: center;
 `
 
-const QuizAnswerChecked = ({answer, checkedType, children}) => {
+const QuizAnswerChecked = ({answer, checkedType, children, ...props}) => {
   const [checked, setChecked] = useState(false)
   const {image} = answer
 

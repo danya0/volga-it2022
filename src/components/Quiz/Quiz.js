@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
 import QuizAnswerChecked from './QuizAnswerChecked'
+import {useDispatch, useSelector} from 'react-redux'
+import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 
 const QuizTitle = styled.h3`
   color: #0F0F0F;
@@ -102,11 +104,31 @@ const SkipButton = styled.div`
 `
 
 const Quiz = ({quiz}) => {
-
   // a state in which the element should display text and an image on the same line
   const oneRow = quiz.answerOption?.oneRow
   // a state where the element is of type 'checked'
   const checked = quiz.answerOption?.checked
+
+  const dispatch = useDispatch()
+  const gender = useSelector(state => state.quiz.gender)
+  const quizOptionName = quiz.optionName
+
+  const generateResponse = (key, answer) => {
+    // quiz 1
+    if (key === 'gender') {
+      console.log('answer.id ->', answer)
+      const gender = answer === 5 ? 'women' : answer === 4 ? 'men' : null
+      dispatch(setGenderCreator({gender}))
+    }
+
+    // dispatch responses to the state
+    dispatch(pushAnswerCreator({
+      key,
+      answer: answer ? answer : null
+    }))
+    // move to the next quiz
+    dispatch(nextQuizCreator())
+  }
 
   return (
       <StyledQuiz
@@ -130,13 +152,22 @@ const Quiz = ({quiz}) => {
               grid={checked}
           >
             {quiz.answers.map((answer, idx) => {
+              // check the gender type to substitute the correct picture
+              let image = answer.image
+              if (typeof answer.image === 'object') {
+                image = answer.image[gender ? gender : 'noGender']
+              }
+
               // depending on the type of question, select the correct element
               if (checked) {
                 return (
                     <QuizAnswerChecked
                       key={idx}
                       checkedType={checked}
-                      answer={answer}
+                      answer={{
+                        ...answer,
+                        image: image
+                      }}
                     >
                       {answer.name}
                     </QuizAnswerChecked>
@@ -147,7 +178,11 @@ const Quiz = ({quiz}) => {
                         key={idx}
                         oneRow={oneRow}
                         checkedType={checked}
-                        answer={answer}
+                        answer={{
+                          ...answer,
+                          image: image
+                        }}
+                        onClick={() => {generateResponse(quizOptionName, answer.id)}}
                     >
                       {answer.name}
                     </QuizAnswer>
@@ -165,7 +200,12 @@ const Quiz = ({quiz}) => {
               Continue
             </Button> : null}
 
-        <SkipButton hide={!quiz.underText}>{quiz.underText}</SkipButton>
+        <SkipButton
+            hide={!quiz.underText}
+            onClick={() => generateResponse(quizOptionName)}
+        >
+          {quiz.underText}
+        </SkipButton>
       </StyledQuiz>
   )
 }

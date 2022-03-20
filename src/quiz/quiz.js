@@ -30,7 +30,8 @@ export const quiz = [
         name: 'Eyeglasses',
         image: {
           men: quizImages.quiz2.menEyeglasses,
-          women: quizImages.quiz2.womenEyeglasses
+          women: quizImages.quiz2.womenEyeglasses,
+          noGender: quizImages.quiz2.menEyeglasses,
         }
       },
       {
@@ -38,7 +39,8 @@ export const quiz = [
         name: 'Sunglasses',
         image: {
           men: quizImages.quiz2.menSunglasses,
-          women: quizImages.quiz2.womenSunglasses
+          women: quizImages.quiz2.womenSunglasses,
+          noGender: quizImages.quiz2.menSunglasses,
         }
       }
     ],
@@ -49,7 +51,7 @@ export const quiz = [
     quizId: 3,
     optionName: 'lenstype',
     previewPageTitle: 'Let\'s get to know you!',
-    title: 'What type of glasses are you looking for?',
+    title: 'Do you need vision correction?',
     answers: [
       {
         id: 0,
@@ -176,6 +178,9 @@ export const quiz = [
     quizId: 6,
     optionName: 'face_type',
     title: 'Every face shape has a perfect fit. What’s yours?',
+    answerOption: {
+      oneRow: true
+    },
     answers: [
       {
         id: 1,

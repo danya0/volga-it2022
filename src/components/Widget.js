@@ -7,6 +7,8 @@ import Quiz from './Quiz/Quiz'
 import {quiz} from '../quiz/quiz'
 import LikeWindow from './LikeWindow'
 import FinalWindow from './FinalWindow'
+import {useDispatch, useSelector} from 'react-redux'
+import {prevQuizCreator, startQuizCreator} from '../store/quizReducer'
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -21,13 +23,25 @@ const StyledWidget = styled.div`
 `
 
 const Widget = () => {
+  const isStart = useSelector(state => state.quiz.start)
+  const quizId  = useSelector(state => state.quiz.quizId)
+  const currentQuiz = quiz[quizId]
+  const dispatch = useDispatch()
+
+  const startFunction = () => {
+    dispatch(startQuizCreator())
+  }
+
+  const prevQuiz = () => {
+    dispatch(prevQuizCreator())
+  }
+
   return (
       <StyledWidget>
-        <Header inProgress/>
-        {/*<Preview/>*/}
-        {/*<Quiz quiz={quiz[7]}/>*/}
+        <Header prev={prevQuiz} inProgress={isStart} progress={quizId + 1}/>
+        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz}/>}
         {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
-        <FinalWindow/>
+        {/*<FinalWindow/>*/}
       </StyledWidget>
   )
 }

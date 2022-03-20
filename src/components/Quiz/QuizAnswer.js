@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled, {css} from 'styled-components'
 
 export const StyledQuizAnswer = styled.div`
@@ -65,9 +65,6 @@ const Divider = styled.div`
 `
 
 const StyledQuizImage = styled.div`
-  ${props => {
-    console.log('props from sqi ->', props)
-  }}
   margin-bottom: ${props => props.noMargin ? 'none' : props.smallBottom ? '8px' : '15px'};
   display: flex;
   justify-content: center;
@@ -88,9 +85,10 @@ export const checkImageAndInsertEl = (imgItem, props) => (
 )
 
 
-const QuizAnswer = ({answer, oneRow, checkedType, children}) => {
-
+const QuizAnswer = ({answer, oneRow, checkedType, children, onClick}) => {
   const {image, oneRowText} = answer
+
+  console.log('answer ->', answer)
 
   return (
       <StyledQuizAnswer
@@ -98,6 +96,8 @@ const QuizAnswer = ({answer, oneRow, checkedType, children}) => {
           oneRow={oneRow}
           // display element on one line with 'space-between'
           oneRowText={oneRowText}
+
+          onClick={onClick}
       >
         {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: oneRow || !children})}
         {oneRow && !oneRowText ? <Divider/> : null}
