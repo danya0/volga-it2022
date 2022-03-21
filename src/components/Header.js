@@ -10,6 +10,7 @@ const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 80px;
+  flex-shrink: 0;
   
   & * > {
     width: 100%;

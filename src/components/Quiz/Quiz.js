@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
 import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch, useSelector} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
+import LikeWindow from '../LikeWindow'
 
 const QuizTitle = styled.h3`
   color: #0F0F0F;
@@ -108,9 +109,17 @@ const Quiz = ({quiz}) => {
   const oneRow = quiz.answerOption?.oneRow
   // a state where the element is of type 'checked'
   const checked = quiz.answerOption?.checked
+  // variable to display 'between page'
+  const betweenPage = quiz.previewPageTitle
+
+  // state that changes to false after 3 seconds of showing betweenPage
+  const [isBetweenPage, setIsBetweenPage] = useState(!!betweenPage)
+  useEffect(() => {
+    setIsBetweenPage(!!betweenPage)
+  }, [betweenPage])
+
 
   const dispatch = useDispatch()
-  const quizAnswers = useSelector(state => state.quiz.answers)
   const gender = useSelector(state => state.quiz.gender)
   const quizOptionName = quiz.optionName
 
@@ -131,7 +140,23 @@ const Quiz = ({quiz}) => {
     dispatch(nextQuizCreator())
   }
 
-  return (
+  useEffect(() => {
+    let timeout
+    if (isBetweenPage) {
+      timeout = setTimeout(() => {
+        setIsBetweenPage(false)
+      }, 2000)
+    }
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [betweenPage, isBetweenPage, quiz])
+
+  // xml parts
+  const betweenPageXML = <LikeWindow>{betweenPage}</LikeWindow>
+
+  const quizXML = (
       <StyledQuiz
           // if 'twoAnswer' or 'ifChecked' need to increase wrapper paddings
           twoAnswer={quiz.answers.length <= 2}
@@ -158,17 +183,18 @@ const Quiz = ({quiz}) => {
               if (typeof answer.image === 'object') {
                 image = answer.image[gender ? gender : 'noGender']
               }
+              const answerWithImage = {
+                ...answer,
+                image
+              }
 
               // depending on the type of question, select the correct element
               if (checked) {
                 return (
                     <QuizAnswerChecked
-                      key={idx}
-                      checkedType={checked}
-                      answer={{
-                        ...answer,
-                        image: image
-                      }}
+                        key={idx}
+                        checkedType={checked}
+                        answer={answerWithImage}
                     >
                       {answer.name}
                     </QuizAnswerChecked>
@@ -179,11 +205,10 @@ const Quiz = ({quiz}) => {
                         key={idx}
                         oneRow={oneRow}
                         checkedType={checked}
-                        answer={{
-                          ...answer,
-                          image: image
+                        answer={answerWithImage}
+                        onClick={() => {
+                          generateResponse(quizOptionName, answer.id)
                         }}
-                        onClick={() => {generateResponse(quizOptionName, answer.id)}}
                     >
                       {answer.name}
                     </QuizAnswer>
@@ -208,6 +233,12 @@ const Quiz = ({quiz}) => {
           {quiz.underText}
         </SkipButton>
       </StyledQuiz>
+  )
+
+  return (
+      <>
+        {isBetweenPage ? betweenPageXML : quizXML}
+      </>
   )
 }
 
