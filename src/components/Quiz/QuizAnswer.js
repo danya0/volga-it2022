@@ -88,8 +88,6 @@ export const checkImageAndInsertEl = (imgItem, props) => (
 const QuizAnswer = ({answer, oneRow, checkedType, children, onClick}) => {
   const {image, oneRowText} = answer
 
-  console.log('answer ->', answer)
-
   return (
       <StyledQuizAnswer
           // display element on one line

@@ -110,6 +110,7 @@ const Quiz = ({quiz}) => {
   const checked = quiz.answerOption?.checked
 
   const dispatch = useDispatch()
+  const quizAnswers = useSelector(state => state.quiz.answers)
   const gender = useSelector(state => state.quiz.gender)
   const quizOptionName = quiz.optionName
 

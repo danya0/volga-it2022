@@ -54,17 +54,17 @@ export const quiz = [
     title: 'Do you need vision correction?',
     answers: [
       {
-        id: 0,
+        id: true,
         name: 'Yes'
       },
       {
-        id: 1,
+        id: false,
         name: 'No'
       }
     ],
     underText: 'I want to see both',
     additionalQuestion: {
-      answerId: 0,
+      answerId: true,
       previewPageTitle: 'What do you need your glasses for?',
       title: 'What type of glasses are you looking for?',
       answers: [
@@ -134,56 +134,66 @@ export const quiz = [
   },
 
   {
+    if: {
+      quizId: 2,
+      answer: 210
+    },
     quizId: 5,
-    optionName: 'protect_eyes',
+    optionName: 'blue_light',
     title: 'Would you like to protect your eyes from light emanating from screens?',
     answers: [
       {
-        id: 1,
+        id: true,
         name: 'Yes'
       },
       {
-        id: 0,
+        id: false,
         name: 'No'
       }
     ],
-    additionalQuestion: {
-      answerId: 1,
-      title: 'When you’re out and about, which shade of lenses do you prefer?',
-      answerOption: {
-        oneRow: true
-      },
-      answers: [
-        {
-          id: 1,
-          name: 'Dark Shade',
-          image: quizImages.quiz5.darkShade
-        },
-        {
-          id: 2,
-          name: 'Light Shade',
-          image: quizImages.quiz5.lightShade
-        },
-        {
-          id: 3,
-          name: 'Transitioning Shade',
-          image: quizImages.quiz5.transitionShade
-        },
-      ]
-    },
     underText: 'I don’t know'
   },
 
   {
-    quizId: 6,
-    optionName: 'face_type',
-    title: 'Every face shape has a perfect fit. What’s yours?',
+    if: {
+      quizId: 2,
+      answer: 211
+    },
+    quizId: 5,
+    optionName: 'shade',
+    title: 'When you’re out and about, which shade of lenses do you prefer?',
     answerOption: {
       oneRow: true
     },
     answers: [
       {
         id: 1,
+        name: 'Dark Shade',
+        image: quizImages.quiz5.darkShade
+      },
+      {
+        id: 2,
+        name: 'Light Shade',
+        image: quizImages.quiz5.lightShade
+      },
+      {
+        id: 3,
+        name: 'Transitioning Shade',
+        image: quizImages.quiz5.transitionShade
+      },
+    ]
+  },
+
+  {
+    quizId: 6,
+    optionName: 'face_shape',
+    title: 'Every face shape has a perfect fit. What’s yours?',
+    answerOption: {
+      oneRow: true
+    },
+    answers: [
+      {
+        id: 'long',
         name: 'I have a long face',
         image: {
           men: quizImages.quiz6.menLong,
@@ -192,7 +202,7 @@ export const quiz = [
         }
       },
       {
-        id: 2,
+        id: 'round',
         name: 'I have a round face',
         image: {
           men: quizImages.quiz6.menRound,
@@ -201,7 +211,7 @@ export const quiz = [
         }
       },
       {
-        id: 3,
+        id: 'between',
         name: 'In between',
         image: {
           men: quizImages.quiz6.menBetween,
@@ -215,19 +225,19 @@ export const quiz = [
 
   {
     quizId: 7,
-    optionName: 'facial_feature',
+    optionName: 'facial_features',
     title: 'How would you define your facial features?',
     answers: [
       {
-        id: 1,
+        id: 'sharp',
         name: 'Sharp',
       },
       {
-        id: 2,
+        id: 'rounded',
         name: 'Rounded',
       },
       {
-        id: 3,
+        id: 'between',
         name: 'In between',
       }
     ],
@@ -236,7 +246,7 @@ export const quiz = [
 
   {
     quizId: 8,
-    optionName: 'frame_style',
+    optionName: 'shape',
     title: 'Which frame style are you looking for?',
     subtitle: 'You can pick more than one.',
     answerOption: {
@@ -297,17 +307,21 @@ export const quiz = [
     title: 'Are you looking for any particular eyewear brands?',
     answers: [
       {
-        id: 1,
+        id: true,
         name: 'Yes, I have some in mind',
       },
       {
-        id: 2,
+        id: false,
         name: 'No, brand isn\'t important',
       }
     ]
   },
 
   {
+    if: {
+      quizId: 9,
+      answer: true
+    },
     quizId: 10,
     optionName: 'brands',
     title: 'Choose your favorite brands',
