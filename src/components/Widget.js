@@ -28,6 +28,8 @@ const Widget = () => {
   const currentQuiz = quiz[quizId]
   const dispatch = useDispatch()
 
+  //todo: будем отслеживать отсюда дополнительный вопрос и передавать его пропсом, дабы избежать повторные рендеры компонента Quiz
+
   const startFunction = () => {
     dispatch(startQuizCreator())
   }
@@ -39,7 +41,7 @@ const Widget = () => {
   return (
       <StyledWidget>
         <Header prev={prevQuiz} inProgress={isStart} progress={quizId + 1}/>
-        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz}/>}
+        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} additionalQuestion={currentQuiz.additionalQuestion}/>}
         {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
         {/*<FinalWindow/>*/}
       </StyledWidget>

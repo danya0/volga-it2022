@@ -1,6 +1,6 @@
 const defaultState = {
   start: false,
-  quizId: 1,
+  quizId: 2,
   gender: null,
   answers: {}
 }

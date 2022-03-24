@@ -65,7 +65,6 @@ export const quiz = [
     underText: 'I want to see both',
     additionalQuestion: {
       answerId: true,
-      previewPageTitle: 'What do you need your glasses for?',
       title: 'What type of glasses are you looking for?',
       answers: [
         {

@@ -31,7 +31,7 @@ const StyledQuiz = styled.div`
   padding-top: ${props => props.withSubtitle ? '30px' : '50px'};
   padding-bottom: 25px;
   ${props => {
-    const padding = props.ifChecked ? '13px' : props.twoAnswer ? '50px' : '30px'
+    const padding = props.ifChecked ? '13px' : props.twoAnswer ? '49px' : '30px'
 
     return css`
       padding-left: ${padding};
@@ -104,13 +104,20 @@ const SkipButton = styled.div`
   display: ${props => props.hide ? 'none' : 'block'};
 `
 
-const Quiz = ({quiz}) => {
+const Quiz = ({quiz: quizFromProps}) => {
+  const [quiz, setQuiz] = useState(quizFromProps)
+  useEffect(() => {
+    setQuiz(quizFromProps)
+  }, [quizFromProps])
+
   // a state in which the element should display text and an image on the same line
   const oneRow = quiz.answerOption?.oneRow
   // a state where the element is of type 'checked'
   const checked = quiz.answerOption?.checked
   // variable to display 'between page'
   const betweenPage = quiz.previewPageTitle
+  // a variable that keeps track of whether there is an additional question
+  const additionalQuestion = quiz.additionalQuestion
 
   // state that changes to false after 3 seconds of showing betweenPage
   const [isBetweenPage, setIsBetweenPage] = useState(!!betweenPage)
@@ -124,9 +131,17 @@ const Quiz = ({quiz}) => {
   const quizOptionName = quiz.optionName
 
   const generateResponse = (key, answer) => {
+    // check additionalQuestion
+    if (additionalQuestion && answer === additionalQuestion.answerId) {
+      setQuiz({
+        optionName: quiz.optionName,
+        ...additionalQuestion
+      })
+      return
+    }
+
     // quiz 1
     if (key === 'gender') {
-      console.log('answer.id ->', answer)
       const gender = answer === 5 ? 'women' : answer === 4 ? 'men' : null
       dispatch(setGenderCreator({gender}))
     }
