@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
 import {IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {Genders} from "../../types/quizReducerTypes";
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -151,10 +153,10 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     }, [betweenPage])
 
     const dispatch = useDispatch()
-    const gender = useSelector(state => state.quiz.gender)
+    const gender = useTypedSelector(state => state.quiz.gender)
     const quizOptionName = quiz.optionName
 
-    const generateResponse = (key: any, answer?: any) => {
+    const generateResponse = (key: string, answer?: any) => {
         // check additionalQuestion
         if (additionalQuestion && answer === additionalQuestion.answerId) {
             setQuiz({
@@ -166,8 +168,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
         // quiz 1
         if (key === 'gender') {
-            const gender = answer === 5 ? 'women' : answer === 4 ? 'men' : null
-            dispatch(setGenderCreator({gender}))
+            const gender: Genders = answer === 5 ? Genders.women : answer === 4 ? Genders.men : Genders.noGender
+            dispatch(setGenderCreator(gender))
         }
 
         // dispatch responses to the state
@@ -220,7 +222,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                         // check the gender type to substitute the correct picture
                         let image = answer.image
                         if (typeof answer.image === 'object') {
-                            image = answer.image[gender ? gender : 'noGender']
+                            image = answer.image[gender]
                         }
                         const answerWithImage = {
                             ...answer,
