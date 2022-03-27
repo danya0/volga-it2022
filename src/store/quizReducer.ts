@@ -13,7 +13,7 @@ import {
 
 const defaultState: QuizState = {
   prevQuizId: null,
-  quizId: -1,
+  quizId: 0,
   gender: Genders.noGender,
   answers: {}
 }

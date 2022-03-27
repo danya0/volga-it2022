@@ -47,12 +47,13 @@ const Widget: FC = () => {
 
     useEffect(() => {
         if (currentQuiz?.displayCondition && prevQuizId) {
-            if (checkCondition(answers, currentQuiz.displayCondition))
+            if (!checkCondition(answers, currentQuiz.displayCondition)) {
                 if (prevQuizId < quizId) {
                     nextQuiz()
                 } else {
                     prevQuiz()
                 }
+            }
         }
     }, [currentQuiz?.displayCondition])
 

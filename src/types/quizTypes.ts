@@ -1,3 +1,5 @@
+import {CheckedArray} from "./components";
+
 export interface IAnswer {
     id: any,
     name?: string,
@@ -9,8 +11,8 @@ export interface IAnswerWithStringImage extends IAnswer {
     image?: string
 }
 
-export type SkipAnswer = null
-export type AnswerType = number | boolean | string | SkipAnswer
+type SkipAnswer = null
+export type AnswerType = number | boolean | string | SkipAnswer | CheckedArray
 
 export interface IAdditionalQuestion extends Omit<IQuiz,
     'quizId'

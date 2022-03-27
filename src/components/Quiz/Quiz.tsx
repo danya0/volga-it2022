@@ -10,6 +10,7 @@ import {AnswerType, IAdditionalQuestion, IDisplayCondition, IQuiz} from "../../t
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {Genders, IAnswerInState} from "../../types/quizReducerTypes";
 import {OptionNames} from "../../quiz/quiz";
+import {CheckedArray, CheckedFunction} from "../../types/components";
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -147,6 +148,16 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     // a variable that keeps track of whether there is an additional question
     const additionalQuestion = quiz.additionalQuestion
 
+    const [checkedAr, setCheckedAr] = useState<CheckedArray>([])
+    const checkedF: CheckedFunction = (id, checked) => {
+        if (checked) {
+            setCheckedAr(prevState => [...prevState, id])
+        } else {
+            let idx = checkedAr.indexOf(id)
+            setCheckedAr(prevState => [...prevState.slice(0, idx), ...prevState.slice(idx + 1)])
+        }
+    }
+
     // state that changes to false after 3 seconds of showing betweenPage
     const [isBetweenPage, setIsBetweenPage] = useState(!!betweenPage)
     useEffect(() => {
@@ -176,7 +187,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         // dispatch responses to the state
         dispatch(pushAnswerCreator({
             key,
-            answer: answer ? answer : null
+            answer: answer
         }))
         // move to the next quiz
         dispatch(nextQuizCreator())
@@ -236,6 +247,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                                 <QuizAnswerChecked
                                     key={idx}
                                     answer={answerWithImage}
+                                    onClick={checkedF}
                                 >
                                     {answer.name}
                                 </QuizAnswerChecked>
@@ -259,10 +271,17 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
             </QuizPlaceWrap>
 
             {checked ?
-                <Button style={{
-                    width: 181,
-                    margin: '0 auto 18px auto'
-                }}>
+                <Button
+                    style={{
+                        width: 181,
+                        margin: '0 auto 18px auto'
+                    }}
+                    inactive={!checkedAr.length}
+                    onClick={() => {
+                        setCheckedAr([])
+                        generateResponse(quizOptionName, checkedAr)
+                    }}
+                >
                     Continue
                 </Button> : null}
 

@@ -3,6 +3,7 @@ import {checkImageAndInsertEl, StyledQuizAnswer, Text} from './QuizAnswer'
 import styled, {css} from 'styled-components'
 import assurance from '../../img/assurance.svg'
 import {IAnswerWithStringImage} from "../../types/quizTypes";
+import {CheckedFunction} from "../../types/components";
 
 interface ICheckedAnswer {
   checked?: boolean
@@ -31,11 +32,12 @@ const Flag = styled.div`
 `
 
 interface IQuizAnswerChecked {
-  answer: IAnswerWithStringImage
+  answer: IAnswerWithStringImage,
+  onClick: CheckedFunction
 }
 
-const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, children, ...props}) => {
-  const [checked, setChecked] = useState(false)
+const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, onClick, children, ...props}) => {
+  const [checked, setChecked] = useState<boolean>(false)
   const {image} = answer
   const checkedType = true
 
@@ -43,7 +45,10 @@ const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, children, ...props})
     <img src={assurance} alt="checked"/>
   </Flag>) : null
 
-  const clickFunction = () => setChecked(!checked)
+  const clickFunction = () => {
+    onClick(answer.id, !checked)
+    setChecked(!checked)
+  }
 
   return (
       <CheckedAnswer

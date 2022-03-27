@@ -268,47 +268,47 @@ export const quiz: IQuiz[] = [
         },
         answers: [
             {
-                id: 1,
+                id: 'rectangle_1',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 2,
+                id: 'rectangle_2',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 3,
+                id: 'rectangle_3',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 4,
+                id: 'rectangle_4',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 5,
+                id: 'rectangle_5',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 6,
+                id: 'rectangle_6',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 7,
+                id: 'rectangle_7',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 8,
+                id: 'rectangle_8',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
             {
-                id: 9,
+                id: 'rectangle_9',
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
@@ -321,11 +321,11 @@ export const quiz: IQuiz[] = [
         title: 'Are you looking for any particular eyewear brands?',
         answers: [
             {
-                id: true,
+                id: 1,
                 name: 'Yes, I have some in mind',
             },
             {
-                id: false,
+                id: 0,
                 name: 'No, brand isn\'t important',
             }
         ]
@@ -334,7 +334,7 @@ export const quiz: IQuiz[] = [
     {
         displayCondition: {
             conditionalQuizName: OptionNames.particular_brands,
-            answer: true
+            answer: 1
         },
         quizId: 10,
         optionName: OptionNames.brands,
@@ -345,39 +345,39 @@ export const quiz: IQuiz[] = [
         },
         answers: [
             {
-                id: 1,
+                id: 'brand_1',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 2,
+                id: 'brand_2',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 3,
+                id: 'brand_3',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 4,
+                id: 'brand_4',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 5,
+                id: 'brand_5',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 6,
+                id: 'brand_6',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 7,
+                id: 'brand_7',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 8,
+                id: 'brand_8',
                 image: quizImages.quiz10.brand1
             },
             {
-                id: 9,
+                id: 'brand_9',
                 image: quizImages.quiz10.brand1
             },
         ]

@@ -1,18 +1,31 @@
 import React, {FC} from 'react'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 interface StyledButtonProps {
     xPadding?: number;
 }
 
 interface ButtonProps extends StyledButtonProps {
+    inactive?: boolean,
+    onClick?: () => void,
     [key: string]: any
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   position: relative;
   border: none;
-  background: linear-gradient(270deg, #45C7FA 0%, #2196F3 100%);
+  ${(props: {inactive?: boolean}) => {
+    if (props.inactive) {
+      return css`
+        background: #DEDEDE;
+        cursor: not-allowed !important;
+      `
+    } else {
+        return css`
+          background: linear-gradient(270deg, #45C7FA 0%, #2196F3 100%);
+        `
+    }
+  }}
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.03);
   border-radius: 24px;
   color: transparent;
@@ -54,12 +67,18 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `
 
-const Button: FC<ButtonProps> = ({children, xPadding, ...props}) => {
-  return (
-      <StyledButton xPadding={xPadding} data-text={children} {...props}>
-        {children}
-      </StyledButton>
-  )
+const Button: FC<ButtonProps> = ({children, inactive, xPadding, onClick, ...props}) => {
+    return (
+        <StyledButton
+            inactive={inactive}
+            xPadding={xPadding}
+            data-text={children}
+            onClick={!inactive ? onClick : null}
+            {...props}
+        >
+            {children}
+        </StyledButton>
+    )
 }
 
 export default Button
