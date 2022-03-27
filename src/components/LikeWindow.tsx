@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import AccentTitle from './UI/AccentTitle'
 import styled, {keyframes} from 'styled-components'
 import likeSvg from '../img/likeWindow/like.svg'
@@ -32,7 +32,7 @@ const Image = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  background-image: url(${props => props.bg});
+  background-image: url(${(props: {bg: string}) => props.bg});
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;
@@ -47,7 +47,7 @@ const Star = styled(Image)`
   background-size: cover;
 `
 
-const LikeWindow = ({children}) => {
+const LikeWindow: FC = ({children}) => {
   return (
       <LikeWindowWrap>
         <Circle>

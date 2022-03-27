@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 import {mainDarkColor} from '../constants/styledConstats'
 import Preview from './Preview'
@@ -7,8 +7,9 @@ import Quiz from './Quiz/Quiz'
 import {quiz} from '../quiz/quiz'
 import LikeWindow from './LikeWindow'
 import FinalWindow from './FinalWindow'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {prevQuizCreator, startQuizCreator} from '../store/quizReducer'
+import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -22,13 +23,11 @@ const StyledWidget = styled.div`
   
 `
 
-const Widget = () => {
-  const isStart = useSelector(state => state.quiz.start)
-  const quizId  = useSelector(state => state.quiz.quizId)
+const Widget: FC = () => {
+  const isStart = useTypedSelector(state => state.quiz.start)
+  const quizId  = useTypedSelector(state => state.quiz.quizId)
   const currentQuiz = quiz[quizId]
   const dispatch = useDispatch()
-
-  //todo: будем отслеживать отсюда дополнительный вопрос и передавать его пропсом, дабы избежать повторные рендеры компонента Quiz
 
   const startFunction = () => {
     dispatch(startQuizCreator())
@@ -41,7 +40,7 @@ const Widget = () => {
   return (
       <StyledWidget>
         <Header prev={prevQuiz} inProgress={isStart} progress={quizId + 1}/>
-        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} additionalQuestion={currentQuiz.additionalQuestion}/>}
+        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} />}
         {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
         {/*<FinalWindow/>*/}
       </StyledWidget>

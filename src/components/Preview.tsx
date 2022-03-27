@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
-import AccentTitle, {StyledAccentTitle} from './UI/AccentTitle'
+import {StyledAccentTitle} from './UI/AccentTitle'
 import PreviewImg from '../img/preview.png'
 import Button from './UI/Button'
 import SubAccentTitle from './UI/SubAccentTitle'
@@ -22,7 +22,11 @@ const ThisAccentTitle = styled(StyledAccentTitle)`
   margin-bottom: 25px;
 `
 
-const Preview = ({startEvent}) => {
+interface PreviewProps {
+    startEvent: () => void
+}
+
+const Preview:FC<PreviewProps> = ({startEvent}) => {
   return (
       <StyledPreview>
         <Image src={PreviewImg} alt="preview"/>

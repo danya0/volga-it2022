@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 
 const Subtitle = styled.p`
@@ -10,7 +10,7 @@ const Subtitle = styled.p`
   margin-bottom: 25px;
 `
 
-const SubAccentTitle = ({children, ...props}) => {
+const SubAccentTitle: FC<any> = ({children, ...props}) => {
   return (
       <Subtitle {...props}>
         {children}

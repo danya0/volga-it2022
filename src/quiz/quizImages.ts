@@ -26,8 +26,9 @@ import nogenRound from '../img/quiz6/nogen_round.svg'
 import fs1 from '../img/quiz8/Bitmap.png'
 // quiz 10
 import brand1 from '../img/quiz10/ray-ban.png'
+import {IQuizImage} from "../types/quizTypes";
 
-export const quizImages = {
+export const quizImages: IQuizImage = {
   quiz1: {men, women},
   quiz2: {menEyeglasses, menSunglasses, womenEyeglasses, womenSunglasses},
   quiz4: {frameSize},

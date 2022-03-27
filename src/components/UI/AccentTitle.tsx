@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 import {accentColor} from '../../constants/styledConstats'
 
@@ -8,7 +8,7 @@ export const StyledAccentTitle = styled.h2`
   text-align: center;
 `
 
-const AccentTitle = ({children, ...props}) => {
+const AccentTitle: FC<any> = ({children, ...props}) => {
   return (
       <StyledAccentTitle {...props}>
         {children}
