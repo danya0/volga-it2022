@@ -1,12 +1,17 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import {checkImageAndInsertEl, StyledQuizAnswer, Text} from './QuizAnswer'
 import styled, {css} from 'styled-components'
 import assurance from '../../img/assurance.svg'
+import {IAnswerWithStringImage} from "../../types/quizTypes";
 
-const CheckedAnswer = styled(StyledQuizAnswer)`
+interface ICheckedAnswer {
+  checked?: boolean
+}
+
+const CheckedAnswer = styled(StyledQuizAnswer)<ICheckedAnswer>`
   position: relative;
 
-  ${props => props.checked ? css`
+  ${(props: ICheckedAnswer) => props.checked ? css`
     border: 1.96px solid #2196F3;
   ` : null}
 `
@@ -25,9 +30,14 @@ const Flag = styled.div`
   align-items: center;
 `
 
-const QuizAnswerChecked = ({answer, checkedType, children, ...props}) => {
+interface IQuizAnswerChecked {
+  answer: IAnswerWithStringImage
+}
+
+const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, children, ...props}) => {
   const [checked, setChecked] = useState(false)
   const {image} = answer
+  const checkedType = true
 
   const flag = checked ? (<Flag>
     <img src={assurance} alt="checked"/>

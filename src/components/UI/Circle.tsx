@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 
 const StyledCircle = styled.div`
@@ -12,7 +12,7 @@ const StyledCircle = styled.div`
   margin-bottom: 40px;  
 `
 
-const Circle = ({children, ...props}) => {
+const Circle: FC<any> = ({children, ...props}) => {
   return (
       <StyledCircle {...props}>
         {children}

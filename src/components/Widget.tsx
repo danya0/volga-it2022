@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 import {mainDarkColor} from '../constants/styledConstats'
 import Preview from './Preview'
@@ -22,7 +22,7 @@ const StyledWidget = styled.div`
   
 `
 
-const Widget = () => {
+const Widget: FC = () => {
   const isStart = useSelector(state => state.quiz.start)
   const quizId  = useSelector(state => state.quiz.quizId)
   const currentQuiz = quiz[quizId]
@@ -41,7 +41,7 @@ const Widget = () => {
   return (
       <StyledWidget>
         <Header prev={prevQuiz} inProgress={isStart} progress={quizId + 1}/>
-        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} additionalQuestion={currentQuiz.additionalQuestion}/>}
+        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} />}
         {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
         {/*<FinalWindow/>*/}
       </StyledWidget>

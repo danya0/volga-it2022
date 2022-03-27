@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 import backArrow from '../img/arrow_left.svg'
 import nextArrow from '../img/arrow_right.svg'
@@ -54,7 +54,14 @@ const Counter = styled.div`
   line-height: 19px;
 `
 
-const Header = ({inProgress, progress, close, prev}) => {
+interface HeaderProps {
+    inProgress?: boolean,
+    progress?: number,
+    close?: boolean,
+    prev?: () => void
+}
+
+const Header:FC<HeaderProps> = ({inProgress, progress, close, prev}) => {
   if (inProgress) {
     return (
         <HeaderWrap>
