@@ -9,12 +9,15 @@ export interface IAnswerWithStringImage extends IAnswer {
     image?: string
 }
 
+export type SkipAnswer = null
+export type AnswerType = number | boolean | string | SkipAnswer
+
 export interface IAdditionalQuestion extends Omit<IQuiz,
     'quizId'
     | 'displayCondition'
     | 'additionalQuestion'
     | 'optionName'>{
-    answerId: any,
+    answerId: AnswerType,
 }
 
 interface IAnswerOptions {
@@ -24,7 +27,7 @@ interface IAnswerOptions {
 
 interface IDisplayCondition {
     conditionalQuizId: number,
-    answer: number | boolean | string
+    answer: AnswerType
 }
 
 export interface IQuiz {

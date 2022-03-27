@@ -55,10 +55,10 @@ const Counter = styled.div`
 `
 
 interface HeaderProps {
-    inProgress?: boolean,
-    progress?: number,
-    close?: boolean,
-    prev?: () => void
+    inProgress: boolean,
+    progress: number,
+    close?: () => void,
+    prev: () => void
 }
 
 const Header:FC<HeaderProps> = ({inProgress, progress, close, prev}) => {
@@ -78,7 +78,7 @@ const Header:FC<HeaderProps> = ({inProgress, progress, close, prev}) => {
         <HeaderWrap>
           <StyledHeader>
             <img src={logo} alt="logo"/>
-            {close ? <CloseBtn/> : <ToRightBtn/>}
+            {close ? <CloseBtn onClick={close}/> : <ToRightBtn/>}
           </StyledHeader>
         </HeaderWrap>
     )

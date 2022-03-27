@@ -4,7 +4,7 @@ import {
   FetchPrevQuizAction,
   FetchPushAnswerAction,
   FetchSetGenderAction,
-  FetchStartAction,
+  FetchStopQuizAction,
   Genders,
   QuizAction,
   QuizActionsTypes,
@@ -12,20 +12,13 @@ import {
 } from "../types/quizReducerTypes";
 
 const defaultState: QuizState = {
-  start: false,
-  quizId: 2,
+  quizId: -1,
   gender: Genders.noGender,
   answers: {}
 }
 
 export const quizReducer = (state = defaultState, action: QuizAction): QuizState => {
   switch (action.type) {
-    case QuizActionsTypes.START_QUIZ: {
-      return {
-        ...state,
-        start: true
-      }
-    }
     case QuizActionsTypes.PUSH_ANSWER: {
       return {
         ...state,
@@ -50,7 +43,14 @@ export const quizReducer = (state = defaultState, action: QuizAction): QuizState
     case QuizActionsTypes.PREV_QUIZ: {
       return {
         ...state,
-        quizId: state.quizId > 0 ? state.quizId - 1 : state.quizId
+        quizId: state.quizId > -1 ? state.quizId - 1 : state.quizId
+      }
+    }
+    case QuizActionsTypes.STOP_QUIZ: {
+      return {
+        ...state,
+        quizId: -1,
+        answers: {}
       }
     }
     default: {
@@ -59,8 +59,8 @@ export const quizReducer = (state = defaultState, action: QuizAction): QuizState
   }
 }
 
-export const startQuizCreator = (): FetchStartAction => ({type: QuizActionsTypes.START_QUIZ})
 export const pushAnswerCreator = (payload: Answer): FetchPushAnswerAction => ({type: QuizActionsTypes.PUSH_ANSWER, payload})
 export const setGenderCreator = (payload: Genders): FetchSetGenderAction => ({type: QuizActionsTypes.SET_GENDER, payload})
 export const nextQuizCreator = (): FetchNextQuizAction => ({type: QuizActionsTypes.NEXT_QUIZ})
 export const prevQuizCreator = (): FetchPrevQuizAction => ({type: QuizActionsTypes.PREV_QUIZ})
+export const stopQuizCreator = (): FetchStopQuizAction => ({type: QuizActionsTypes.STOP_QUIZ})

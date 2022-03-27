@@ -6,7 +6,7 @@ import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
-import {IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
+import {AnswerType, IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {Genders} from "../../types/quizReducerTypes";
 
@@ -156,7 +156,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     const gender = useTypedSelector(state => state.quiz.gender)
     const quizOptionName = quiz.optionName
 
-    const generateResponse = (key: string, answer?: any) => {
+    const generateResponse = (key: string, answer: AnswerType) => {
         // check additionalQuestion
         if (additionalQuestion && answer === additionalQuestion.answerId) {
             setQuiz({
@@ -267,7 +267,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
             <SkipButton
                 hide={!quiz.underText}
-                onClick={() => generateResponse(quizOptionName)}
+                onClick={() => generateResponse(quizOptionName, null)}
             >
                 {quiz.underText}
             </SkipButton>

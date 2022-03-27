@@ -8,7 +8,7 @@ import {quiz} from '../quiz/quiz'
 import LikeWindow from './LikeWindow'
 import FinalWindow from './FinalWindow'
 import {useDispatch} from 'react-redux'
-import {prevQuizCreator, startQuizCreator} from '../store/quizReducer'
+import {nextQuizCreator, prevQuizCreator, stopQuizCreator} from '../store/quizReducer'
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
 const StyledWidget = styled.div`
@@ -20,31 +20,38 @@ const StyledWidget = styled.div`
 
   display: flex;
   flex-direction: column;
-  
 `
 
 const Widget: FC = () => {
-  const isStart = useTypedSelector(state => state.quiz.start)
-  const quizId  = useTypedSelector(state => state.quiz.quizId)
-  const currentQuiz = quiz[quizId]
-  const dispatch = useDispatch()
+    const quizId = useTypedSelector(state => state.quiz.quizId)
+    const currentQuiz = quiz[quizId]
+    const dispatch = useDispatch()
 
-  const startFunction = () => {
-    dispatch(startQuizCreator())
-  }
+    const startFunction = () => {
+        dispatch(nextQuizCreator())
+    }
 
-  const prevQuiz = () => {
-    dispatch(prevQuizCreator())
-  }
+    const prevQuiz = () => {
+        dispatch(prevQuizCreator())
+    }
 
-  return (
-      <StyledWidget>
-        <Header prev={prevQuiz} inProgress={isStart} progress={quizId + 1}/>
-        {!isStart ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz} />}
-        {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
-        {/*<FinalWindow/>*/}
-      </StyledWidget>
-  )
+    const stopQuiz = () => {
+        dispatch(stopQuizCreator())
+    }
+
+    return (
+        <StyledWidget>
+            <Header
+                prev={prevQuiz}
+                close={quizId >= 0 ? stopQuiz : undefined}
+                inProgress={quizId >= 0}
+                progress={quizId + 1}
+            />
+            {quizId < 0 ? <Preview startEvent={startFunction}/> : <Quiz quiz={currentQuiz}/>}
+            {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
+            {/*<FinalWindow/>*/}
+        </StyledWidget>
+    )
 }
 
 export default Widget

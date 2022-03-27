@@ -10,7 +10,6 @@ export enum Genders {
 }
 
 export interface QuizState {
-    start: boolean,
     quizId: number,
     gender: Genders,
     answers: {
@@ -19,16 +18,13 @@ export interface QuizState {
 }
 
 export enum QuizActionsTypes {
-    START_QUIZ = 'START_QUIZ',
     NEXT_QUIZ = 'NEXT_QUIZ',
     PREV_QUIZ = 'PREV_QUIZ',
     PUSH_ANSWER = 'PUSH_ANSWER',
     SET_GENDER = 'SET_GENDER',
+    STOP_QUIZ = 'STOP_QUIZ',
 }
 
-export interface FetchStartAction {
-    type: QuizActionsTypes.START_QUIZ
-}
 export interface FetchNextQuizAction {
     type: QuizActionsTypes.NEXT_QUIZ
 }
@@ -43,5 +39,8 @@ export interface FetchSetGenderAction {
     type: QuizActionsTypes.SET_GENDER,
     payload: Genders
 }
+export interface FetchStopQuizAction {
+    type: QuizActionsTypes.STOP_QUIZ
+}
 
-export type QuizAction = FetchStartAction | FetchNextQuizAction | FetchPrevQuizAction | FetchPushAnswerAction | FetchSetGenderAction
+export type QuizAction = FetchNextQuizAction | FetchPrevQuizAction | FetchPushAnswerAction | FetchSetGenderAction | FetchStopQuizAction

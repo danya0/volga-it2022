@@ -112,7 +112,7 @@ export const quiz: IQuiz[] = [
         ],
         underText: 'I don’t know',
         additionalQuestion: {
-            answerId: 'skip',
+            answerId: null,
             previewPageTitle: 'No worries, we’ve got you!',
             title: 'How wide would you say your face is?',
             answers: [
