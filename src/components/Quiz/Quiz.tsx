@@ -6,9 +6,10 @@ import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
-import {AnswerType, IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
+import {AnswerType, IAdditionalQuestion, IDisplayCondition, IQuiz} from "../../types/quizTypes";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {Genders} from "../../types/quizReducerTypes";
+import {Genders, IAnswerInState} from "../../types/quizReducerTypes";
+import {OptionNames} from "../../quiz/quiz";
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -167,7 +168,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         }
 
         // quiz 1
-        if (key === 'gender') {
+        if (key === OptionNames.gender) {
             const gender: Genders = answer === 5 ? Genders.women : answer === 4 ? Genders.men : Genders.noGender
             dispatch(setGenderCreator(gender))
         }

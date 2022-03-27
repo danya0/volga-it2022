@@ -12,6 +12,7 @@ import {
 } from "../types/quizReducerTypes";
 
 const defaultState: QuizState = {
+  prevQuizId: null,
   quizId: -1,
   gender: Genders.noGender,
   answers: {}
@@ -37,18 +38,21 @@ export const quizReducer = (state = defaultState, action: QuizAction): QuizState
     case QuizActionsTypes.NEXT_QUIZ: {
       return {
         ...state,
+        prevQuizId: state.quizId,
         quizId: state.quizId + 1
       }
     }
     case QuizActionsTypes.PREV_QUIZ: {
       return {
         ...state,
+        prevQuizId: state.quizId,
         quizId: state.quizId > -1 ? state.quizId - 1 : state.quizId
       }
     }
     case QuizActionsTypes.STOP_QUIZ: {
       return {
         ...state,
+        prevQuizId: null,
         quizId: -1,
         answers: {}
       }

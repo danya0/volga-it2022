@@ -25,8 +25,8 @@ interface IAnswerOptions {
     checked?: boolean
 }
 
-interface IDisplayCondition {
-    conditionalQuizId: number,
+export interface IDisplayCondition {
+    conditionalQuizName: string,
     answer: AnswerType
 }
 

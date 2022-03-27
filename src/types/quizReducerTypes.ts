@@ -9,12 +9,15 @@ export enum Genders {
     noGender = 'noGender'
 }
 
+export type IAnswerInState = {
+    [key: string]: any
+}
+
 export interface QuizState {
+    prevQuizId: number | null
     quizId: number,
     gender: Genders,
-    answers: {
-        [key: string]: any
-    }
+    answers: IAnswerInState
 }
 
 export enum QuizActionsTypes {

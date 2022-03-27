@@ -1,10 +1,24 @@
 import {quizImages} from './quizImages'
 import {IQuiz} from "../types/quizTypes";
 
+export enum OptionNames {
+    gender = 'gender',
+    eyewear_type = 'eyewear_type',
+    lenstype = 'lenstype',
+    frame_size = 'frame_size',
+    blue_light = 'blue_light',
+    shade = 'shade',
+    face_shape = 'face_shape',
+    facial_features = 'facial_features',
+    shape = 'shape',
+    particular_brands = 'particular_brands',
+    brands = 'brands'
+}
+
 export const quiz: IQuiz[] = [
     {
         quizId: 1,
-        optionName: 'gender',
+        optionName: OptionNames.gender,
         title: 'You are looking for',
         answers: [
             {
@@ -23,7 +37,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 2,
-        optionName: 'eyewear_type',
+        optionName: OptionNames.eyewear_type,
         title: 'What type of glasses are you looking for?',
         answers: [
             {
@@ -50,7 +64,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 3,
-        optionName: 'lenstype',
+        optionName: OptionNames.lenstype,
         previewPageTitle: 'Let\'s get to know you!',
         title: 'Do you need vision correction?',
         answers: [
@@ -87,7 +101,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 4,
-        optionName: 'frame_size',
+        optionName: OptionNames.frame_size,
         title: 'What’s your current frame size?',
         image: quizImages.quiz4.frameSize,
         answerOptions: {
@@ -135,11 +149,11 @@ export const quiz: IQuiz[] = [
 
     {
         displayCondition: {
-            conditionalQuizId: 2,
+            conditionalQuizName: OptionNames.eyewear_type,
             answer: 210
         },
         quizId: 5,
-        optionName: 'blue_light',
+        optionName: OptionNames.blue_light,
         title: 'Would you like to protect your eyes from light emanating from screens?',
         answers: [
             {
@@ -156,11 +170,11 @@ export const quiz: IQuiz[] = [
 
     {
         displayCondition: {
-            conditionalQuizId: 2,
+            conditionalQuizName: OptionNames.eyewear_type,
             answer: 211
         },
         quizId: 5,
-        optionName: 'shade',
+        optionName: OptionNames.shade,
         title: 'When you’re out and about, which shade of lenses do you prefer?',
         answerOptions: {
             oneRow: true
@@ -186,7 +200,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 6,
-        optionName: 'face_shape',
+        optionName: OptionNames.face_shape,
         title: 'Every face shape has a perfect fit. What’s yours?',
         answerOptions: {
             oneRow: true
@@ -225,7 +239,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 7,
-        optionName: 'facial_features',
+        optionName: OptionNames.facial_features,
         title: 'How would you define your facial features?',
         answers: [
             {
@@ -246,7 +260,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 8,
-        optionName: 'shape',
+        optionName: OptionNames.shape,
         title: 'Which frame style are you looking for?',
         subtitle: 'You can pick more than one.',
         answerOptions: {
@@ -303,7 +317,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 9,
-        optionName: 'particular_brands',
+        optionName: OptionNames.particular_brands,
         title: 'Are you looking for any particular eyewear brands?',
         answers: [
             {
@@ -319,11 +333,11 @@ export const quiz: IQuiz[] = [
 
     {
         displayCondition: {
-            conditionalQuizId: 9,
+            conditionalQuizName: OptionNames.particular_brands,
             answer: true
         },
         quizId: 10,
-        optionName: 'brands',
+        optionName: OptionNames.brands,
         title: 'Choose your favorite brands',
         subtitle: 'You can pick more than one.',
         answerOptions: {
