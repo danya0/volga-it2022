@@ -7,7 +7,7 @@ import Quiz from './Quiz/Quiz'
 import {quiz} from '../quiz/quiz'
 import LikeWindow from './LikeWindow'
 import FinalWindow from './FinalWindow'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {prevQuizCreator, startQuizCreator} from '../store/quizReducer'
 import {useTypedSelector} from "../hooks/useTypedSelector";
 
@@ -28,8 +28,6 @@ const Widget: FC = () => {
   const quizId  = useTypedSelector(state => state.quiz.quizId)
   const currentQuiz = quiz[quizId]
   const dispatch = useDispatch()
-
-  //todo: будем отслеживать отсюда дополнительный вопрос и передавать его пропсом, дабы избежать повторные рендеры компонента Quiz
 
   const startFunction = () => {
     dispatch(startQuizCreator())

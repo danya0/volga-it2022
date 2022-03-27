@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
-import styled, {css} from 'styled-components'
-import any = jasmine.any;
+import styled from 'styled-components'
 
 interface StyledButtonProps {
     xPadding?: number;

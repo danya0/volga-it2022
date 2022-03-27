@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
 import QuizAnswerChecked from './QuizAnswerChecked'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
 import {IAdditionalQuestion, IQuiz} from "../../types/quizTypes";

@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
 import styled from 'styled-components'
-import {accentColor} from '../../constants/styledConstats'
 
 interface ProgressBarProps {
   current: number,

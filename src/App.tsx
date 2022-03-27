@@ -5,7 +5,7 @@ const App: FC = () => {
   const [isContainSource, setIsContainsSource] = useState<boolean>(false)
 
   useEffect(() => {
-    const root: HTMLElement = document.querySelector('#glasses-quiz-widget')
+    const root: HTMLElement = document.querySelector('#glasses-quiz-widget')!
 
     if (root.dataset.source) {
       setIsContainsSource(true)

@@ -1,4 +1,4 @@
-import React, {FC, ReactChildren, useEffect, useState} from 'react'
+import React, {FC} from 'react'
 import styled, {css} from 'styled-components'
 import {IAnswerWithStringImage} from "../../types/quizTypes"
 

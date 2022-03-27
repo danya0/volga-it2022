@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import styled from 'styled-components'
-import AccentTitle, {StyledAccentTitle} from './UI/AccentTitle'
+import {StyledAccentTitle} from './UI/AccentTitle'
 import PreviewImg from '../img/preview.png'
 import Button from './UI/Button'
 import SubAccentTitle from './UI/SubAccentTitle'
