@@ -4,14 +4,13 @@ import {mainDarkColor} from '../constants/styledConstats'
 import Preview from './Preview'
 import Header from './Header'
 import Quiz from './Quiz/Quiz'
-import {quiz} from '../quiz/quiz'
-import LikeWindow from './LikeWindow'
-import FinalWindow from './FinalWindow'
+import {getQuizLength, quiz} from '../quiz/quiz'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, prevQuizCreator, stopQuizCreator} from '../store/quizReducer'
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {IAnswerInState} from "../types/quizReducerTypes";
 import {IDisplayCondition} from "../types/quizTypes";
+import FinalWindow from "./FinalWindow";
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -31,6 +30,7 @@ const Widget: FC = () => {
     const prevQuizId = useTypedSelector(state => state.quiz.prevQuizId)
     const quizId = useTypedSelector(state => state.quiz.quizId)
     const currentQuiz = quiz[quizId]
+    const finalQuizId = quiz[quiz.length - 1].quizId
     const dispatch = useDispatch()
 
     const nextQuiz = () => {
@@ -58,17 +58,17 @@ const Widget: FC = () => {
     }, [currentQuiz?.displayCondition])
 
 
+    const widgetBody = quizId < 0 ? <Preview startEvent={nextQuiz}/> : quizId > finalQuizId ? <FinalWindow /> : <Quiz quiz={currentQuiz}/>
+
     return (
         <StyledWidget>
             <Header
                 prev={prevQuiz}
-                close={quizId >= 0 ? stopQuiz : undefined}
-                inProgress={quizId >= 0}
-                progress={currentQuiz ? currentQuiz.quizId : undefined}
+                close={stopQuiz}
+                maxProgress={getQuizLength()}
+                progress={currentQuiz ? currentQuiz.quizId : quizId}
             />
-            {quizId < 0 ? <Preview startEvent={nextQuiz}/> : <Quiz quiz={currentQuiz}/>}
-            {/*<LikeWindow>No worries, we’ve got you!</LikeWindow>*/}
-            {/*<FinalWindow/>*/}
+            {widgetBody}
         </StyledWidget>
     )
 }

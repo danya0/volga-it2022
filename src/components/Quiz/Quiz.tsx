@@ -6,9 +6,9 @@ import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
-import {AnswerType, IAdditionalQuestion, IDisplayCondition, IQuiz} from "../../types/quizTypes";
+import {AnswerType, IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {Genders, IAnswerInState} from "../../types/quizReducerTypes";
+import {Genders} from "../../types/quizReducerTypes";
 import {OptionNames} from "../../quiz/quiz";
 import {CheckedArray, CheckedFunction} from "../../types/components";
 

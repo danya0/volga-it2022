@@ -55,34 +55,39 @@ const Counter = styled.div`
 `
 
 interface HeaderProps {
-    inProgress: boolean,
-    progress?: number,
-    close?: () => void,
+    progress: number,
+    maxProgress: number,
+    close: () => void,
     prev: () => void
 }
 
-const Header:FC<HeaderProps> = ({inProgress, progress, close, prev}) => {
-  if (inProgress) {
-    return (
-        <HeaderWrap>
-          <StyledHeader>
+const Header: FC<HeaderProps> = ({progress, maxProgress, close, prev}) => {
+    const isFinal = progress > maxProgress
+
+    // xml part
+    const closeBtn = <CloseBtn onClick={close}/>
+
+    const headerInProgress =
+        <>
             <BackBtn onClick={prev}/>
-            <Counter>{progress}/10</Counter>
-            <CloseBtn onClick={close}/>
-          </StyledHeader>
-          <ProgressBar current={1} max={10}/>
-        </HeaderWrap>
-    )
-  } else {
+            <Counter>{progress}/{maxProgress}</Counter>
+            {closeBtn}
+        </>
+
+    const header =
+        <>
+            <img src={logo} alt="logo"/>
+            {isFinal ? closeBtn : <ToRightBtn/>}
+        </>
+
     return (
         <HeaderWrap>
-          <StyledHeader>
-            <img src={logo} alt="logo"/>
-            <ToRightBtn/>
-          </StyledHeader>
+            <StyledHeader>
+                {progress < 0 || isFinal ? header : headerInProgress}
+            </StyledHeader>
+            { progress > 0 ? <ProgressBar current={progress} max={maxProgress}/> : null}
         </HeaderWrap>
     )
-  }
 }
 
 export default Header

@@ -12,7 +12,7 @@ export enum OptionNames {
     facial_features = 'facial_features',
     shape = 'shape',
     particular_brands = 'particular_brands',
-    brands = 'brands'
+    brand = 'brand'
 }
 
 export const quiz: IQuiz[] = [
@@ -337,7 +337,7 @@ export const quiz: IQuiz[] = [
             answer: 1
         },
         quizId: 10,
-        optionName: OptionNames.brands,
+        optionName: OptionNames.brand,
         title: 'Choose your favorite brands',
         subtitle: 'You can pick more than one.',
         answerOptions: {
@@ -383,3 +383,16 @@ export const quiz: IQuiz[] = [
         ]
     },
 ]
+
+
+export function getQuizLength() {
+    return quiz.reduce((acc: number[], item) => {
+        const {quizId} = item
+
+        if (acc.indexOf(quizId) === -1) {
+            acc.push(quizId)
+        }
+
+        return acc
+    }, []).length
+}
