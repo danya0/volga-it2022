@@ -29,7 +29,7 @@ interface IAnswerOptions {
 
 export interface IDisplayCondition {
     conditionalQuizName: string,
-    answer: AnswerType
+    answer: AnswerType | AnswerType[]
 }
 
 export interface IQuiz {

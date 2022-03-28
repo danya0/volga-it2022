@@ -150,7 +150,7 @@ export const quiz: IQuiz[] = [
     {
         displayCondition: {
             conditionalQuizName: OptionNames.eyewear_type,
-            answer: 210
+            answer: [210, null]
         },
         quizId: 5,
         optionName: OptionNames.blue_light,

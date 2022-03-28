@@ -23,7 +23,13 @@ const StyledWidget = styled.div`
   flex-direction: column;
 `
 
-const checkCondition = (answers: IAnswerInState, condition: IDisplayCondition) => answers[condition.conditionalQuizName] === condition.answer
+const checkCondition = (answers: IAnswerInState, condition: IDisplayCondition) => {
+    if (Array.isArray(condition.answer)) {
+        // if there is at least one match from the response array, return true
+        return condition.answer.filter(answ => answ === answers[condition.conditionalQuizName]).length >= 1
+    }
+    return answers[condition.conditionalQuizName] === condition.answer
+}
 
 const Widget: FC = () => {
     const answers = useTypedSelector(state => state.quiz.answers)
