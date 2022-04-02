@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import styled from 'styled-components'
 import Circle from './UI/Circle'
 import giftSvg from '../img/finalWindow/gift.svg'
@@ -44,7 +44,11 @@ const Policy = styled.p`
   color: #5B6971;
 `
 
-const FinalWindow = () => {
+interface FinalWindowProps {
+    sendEvent: () => any
+}
+
+const FinalWindow: FC<FinalWindowProps> = ({sendEvent}) => {
   return (
       <StyledFinalWindow>
         <Circle style={{
@@ -57,7 +61,7 @@ const FinalWindow = () => {
           marginBottom: 50,
           lineHeight: '155%'
         }}>Send the results to your email to receive special discounts.</SubAccentTitle>
-        <Button xPadding={70}>Send</Button>
+        <Button onClick={sendEvent} xPadding={70}>Send</Button>
 
         <Policy>By clicking ‘Send’ you agree to our Terms of Use & Privacy Policy and receiving promotion emails</Policy>
       </StyledFinalWindow>

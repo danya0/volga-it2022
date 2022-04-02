@@ -11,6 +11,9 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {IAnswerInState} from "../types/quizReducerTypes";
 import {IDisplayCondition} from "../types/quizTypes";
 import FinalWindow from "./FinalWindow";
+import {generateLink} from "../utils/generateLink";
+import getDataSource from "../utils/getDataSource";
+import objectCheck from "../utils/objectCheck";
 
 const StyledWidget = styled.div`
   margin: 0 auto;
@@ -24,7 +27,13 @@ const StyledWidget = styled.div`
 `
 
 const checkCondition = (answers: IAnswerInState, condition: IDisplayCondition) => {
-    const rightAnswer = typeof answers[condition.conditionalQuizName] === 'object' ? answers[condition.conditionalQuizName].answer : answers[condition.conditionalQuizName]
+    let rightAnswer: any
+    const currentAnswer = answers[condition.conditionalQuizName]
+    if (objectCheck(currentAnswer)) {
+        rightAnswer = currentAnswer.answer
+    } else {
+        rightAnswer = currentAnswer
+    }
 
     if (Array.isArray(condition.answer)) {
         // if there is at least one match from the response array, return true
@@ -65,8 +74,7 @@ const Widget: FC = () => {
         }
     }, [currentQuiz?.displayCondition])
 
-
-    const widgetBody = quizId < 0 ? <Preview startEvent={nextQuiz}/> : quizId > finalQuizId ? <FinalWindow /> : <Quiz quiz={currentQuiz}/>
+    const widgetBody = quizId < 0 ? <Preview startEvent={nextQuiz}/> : quizId > finalQuizId ? <FinalWindow sendEvent={() => console.log(generateLink(answers, getDataSource() || ''))} /> : <Quiz quiz={currentQuiz}/>
 
     return (
         <StyledWidget>

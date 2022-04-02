@@ -1,13 +1,12 @@
 import {FC, useEffect, useState} from 'react'
-import Widget from './components/Widget'
+import Widget from './Widget'
+import getDataSource from "../utils/getDataSource";
 
 const App: FC = () => {
   const [isContainSource, setIsContainsSource] = useState<boolean>(false)
 
   useEffect(() => {
-    const root: HTMLElement = document.querySelector('#glasses-quiz-widget')!
-
-    if (root.dataset.source) {
+    if (getDataSource()) {
       setIsContainsSource(true)
     }
   }, [])

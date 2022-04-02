@@ -26,7 +26,7 @@ export const quizReducer = (state = defaultState, action: QuizAction): QuizState
       if (action.payload.doNotShowInReplies) {
         body = {
           answer: action.payload.answer,
-          doNotShowInReply: action.payload.doNotShowInReplies
+          doNotShowInReplies: action.payload.doNotShowInReplies
         }
       } else {
         body = action.payload.answer
