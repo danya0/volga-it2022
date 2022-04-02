@@ -24,11 +24,13 @@ const StyledWidget = styled.div`
 `
 
 const checkCondition = (answers: IAnswerInState, condition: IDisplayCondition) => {
+    const rightAnswer = typeof answers[condition.conditionalQuizName] === 'object' ? answers[condition.conditionalQuizName].answer : answers[condition.conditionalQuizName]
+
     if (Array.isArray(condition.answer)) {
         // if there is at least one match from the response array, return true
-        return condition.answer.filter(answ => answ === answers[condition.conditionalQuizName]).length >= 1
+        return condition.answer.filter(answ => answ === rightAnswer).length >= 1
     }
-    return answers[condition.conditionalQuizName] === condition.answer
+    return rightAnswer === condition.answer
 }
 
 const Widget: FC = () => {

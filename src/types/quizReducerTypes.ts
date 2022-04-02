@@ -1,6 +1,7 @@
 export type Answer = {
     key: string,
-    answer: any
+    answer: any,
+    doNotShowInReplies: boolean
 };
 
 export enum Genders {

@@ -21,11 +21,22 @@ const defaultState: QuizState = {
 export const quizReducer = (state = defaultState, action: QuizAction): QuizState => {
   switch (action.type) {
     case QuizActionsTypes.PUSH_ANSWER: {
+      let body = {}
+
+      if (action.payload.doNotShowInReplies) {
+        body = {
+          answer: action.payload.answer,
+          doNotShowInReply: action.payload.doNotShowInReplies
+        }
+      } else {
+        body = action.payload.answer
+      }
+
       return {
         ...state,
         answers: {
           ...state.answers,
-          [action.payload.key]: action.payload.answer
+          [action.payload.key]: body
         }
       }
     }

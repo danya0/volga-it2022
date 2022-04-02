@@ -317,6 +317,7 @@ export const quiz: IQuiz[] = [
 
     {
         quizId: 9,
+        doNotShowInReplies: true,
         optionName: OptionNames.particular_brands,
         title: 'Are you looking for any particular eyewear brands?',
         answers: [

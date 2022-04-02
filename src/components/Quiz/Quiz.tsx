@@ -164,11 +164,25 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         setIsBetweenPage(!!betweenPage)
     }, [betweenPage])
 
+    useEffect(() => {
+        let timeout: any
+        if (isBetweenPage) {
+            timeout = setTimeout(() => {
+                setIsBetweenPage(false)
+            }, 2000)
+        }
+
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [betweenPage, isBetweenPage, quiz])
+
     const dispatch = useDispatch()
     const gender = useTypedSelector(state => state.quiz.gender)
     const quizOptionName = quiz.optionName
 
-    const generateResponse = (key: string, answer: AnswerType) => {
+    const generateResponse = (key: string, answer: AnswerType, doNotShowInReplies: boolean) => {
+
         // check additionalQuestion
         if (additionalQuestion && answer === additionalQuestion.answerId) {
             setQuiz({
@@ -187,24 +201,12 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         // dispatch responses to the state
         dispatch(pushAnswerCreator({
             key,
-            answer: answer
+            answer,
+            doNotShowInReplies
         }))
         // move to the next quiz
         dispatch(nextQuizCreator())
     }
-
-    useEffect(() => {
-        let timeout: any
-        if (isBetweenPage) {
-            timeout = setTimeout(() => {
-                setIsBetweenPage(false)
-            }, 2000)
-        }
-
-        return () => {
-            clearTimeout(timeout)
-        }
-    }, [betweenPage, isBetweenPage, quiz])
 
     // xml parts
     const betweenPageXML = <LikeWindow>{betweenPage}</LikeWindow>
@@ -259,7 +261,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                                     oneRow={oneRow}
                                     answer={answerWithImage}
                                     onClick={() => {
-                                        generateResponse(quizOptionName, answer.id)
+                                        generateResponse(quizOptionName, answer.id, !!quiz.doNotShowInReplies
+                                        )
                                     }}
                                 >
                                     {answer.name}
@@ -279,7 +282,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                     inactive={!checkedAr.length}
                     onClick={() => {
                         setCheckedAr([])
-                        generateResponse(quizOptionName, checkedAr)
+                        generateResponse(quizOptionName, checkedAr, !!quiz.doNotShowInReplies
+                        )
                     }}
                 >
                     Continue
@@ -287,7 +291,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
             <SkipButton
                 hide={!quiz.underText}
-                onClick={() => generateResponse(quizOptionName, null)}
+                onClick={() => generateResponse(quizOptionName, null, !!quiz.doNotShowInReplies
+                )}
             >
                 {quiz.underText}
             </SkipButton>

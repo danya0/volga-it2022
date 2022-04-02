@@ -35,6 +35,7 @@ export interface IDisplayCondition {
 export interface IQuiz {
     displayCondition?: IDisplayCondition
     quizId: number,
+    doNotShowInReplies?: boolean,
     optionName: string,
     title: string,
     subtitle?: string,
