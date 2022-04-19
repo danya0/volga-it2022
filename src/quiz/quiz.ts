@@ -23,12 +23,12 @@ export const quiz: IQuiz[] = [
         title: 'You are looking for',
         answers: [
             {
-                id: Genders.women,
+g                id: 5,
                 name: 'Women\'s Styles',
                 image: quizImages.quiz1.women
             },
             {
-                id: Genders.women,
+                id: 4,
                 name: 'Men\'s Styles',
                 image: quizImages.quiz1.men
             }

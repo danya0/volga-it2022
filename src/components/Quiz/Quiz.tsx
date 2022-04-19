@@ -190,6 +190,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         // quiz 1
         if (key === OptionNames.gender) {
             const gender: Genders = answer === 5 ? Genders.women : answer === 4 ? Genders.men : Genders.noGender
+            console.log('answer ->', answer)
+            console.log('gender ->', gender)
             dispatch(setGenderCreator(gender))
         }
 
