@@ -230,8 +230,6 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                     {quiz.answers.map((answer: any, idx: number) => {
                         // check the gender type to substitute the correct picture
                         let image = answer.image
-                        console.log('image ->', image)
-                        console.log('gender ->', gender)
                         if (typeof answer.image === 'object') {
                             image = answer.image[gender]
                         }

@@ -110,8 +110,6 @@ const QuizAnswer: FC<IQuizAnswer> = ({answer, oneRow, children, onClick, ...prop
     const {image, oneRowText} = answer
     const checkedType = false
 
-    console.log('answer ->', answer)
-
     return (
         <StyledQuizAnswer
             // display element on one line
