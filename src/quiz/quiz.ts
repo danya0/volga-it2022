@@ -1,5 +1,6 @@
 import {quizImages} from './quizImages'
 import {IQuiz} from "../types/quizTypes";
+import {Genders} from "../types/quizReducerTypes";
 
 export enum OptionNames {
     gender = 'gender',
@@ -22,12 +23,12 @@ export const quiz: IQuiz[] = [
         title: 'You are looking for',
         answers: [
             {
-                id: 5,
+                id: Genders.women,
                 name: 'Women\'s Styles',
                 image: quizImages.quiz1.women
             },
             {
-                id: 4,
+                id: Genders.women,
                 name: 'Men\'s Styles',
                 image: quizImages.quiz1.men
             }
@@ -164,8 +165,7 @@ export const quiz: IQuiz[] = [
                 id: false,
                 name: 'No'
             }
-        ],
-        underText: 'I don’t know'
+        ]
     },
 
     {

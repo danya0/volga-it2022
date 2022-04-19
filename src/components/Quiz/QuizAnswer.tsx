@@ -86,14 +86,14 @@ const StyledQuizImage = styled.div<IStyledQuizImage>`
   align-items: center;
 `
 
-export const checkImageAndInsertEl = (imgItem?: string, props?: any) => (
+export const checkImageAndInsertEl = (imgItem?: string, props?: any, alt?: string) => (
     imgItem
         ?
         // smallBottom={checkedType && children} noMargin={oneRow || !children}
         <StyledQuizImage
             {...props}
         >
-            <img src={imgItem} alt="quiz-answer"/>
+            <img src={imgItem} alt={alt ? alt : "quiz-answer"}/>
         </StyledQuizImage>
         :
         null
@@ -102,12 +102,15 @@ export const checkImageAndInsertEl = (imgItem?: string, props?: any) => (
 interface IQuizAnswer {
     answer: IAnswerWithStringImage;
     oneRow?: boolean;
-    onClick?: () => void
+    onClick?: () => void;
+    [key: string]: any
 }
 
-const QuizAnswer: FC<IQuizAnswer> = ({answer, oneRow, children, onClick}) => {
+const QuizAnswer: FC<IQuizAnswer> = ({answer, oneRow, children, onClick, ...props}) => {
     const {image, oneRowText} = answer
     const checkedType = false
+
+    console.log('answer ->', answer)
 
     return (
         <StyledQuizAnswer
@@ -117,8 +120,9 @@ const QuizAnswer: FC<IQuizAnswer> = ({answer, oneRow, children, onClick}) => {
             oneRowText={oneRowText}
 
             onClick={onClick}
+            {...props}
         >
-            {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: oneRow || !children})}
+            {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: oneRow || !children}, `${children}` || oneRowText)}
             {oneRow && !oneRowText ? <Divider/> : null}
             {children ? <Text small={checkedType}>{children}</Text> : null}
             {oneRowText ? <OneRowText>{oneRowText}</OneRowText> : null}

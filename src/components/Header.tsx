@@ -5,6 +5,7 @@ import nextArrow from '../img/arrow_right.svg'
 import close from '../img/exit.svg'
 import logo from '../img/logo.png'
 import ProgressBar from './UI/ProgressBar'
+import {checkDevelopmentMode} from '../utils/checkDevelopmentMode'
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -65,11 +66,11 @@ const Header: FC<HeaderProps> = ({progress, maxProgress, close, prev}) => {
     const isFinal = progress > maxProgress
 
     // xml part
-    const closeBtn = <CloseBtn onClick={close}/>
+    const closeBtn = <CloseBtn data-testid={checkDevelopmentMode('header-close')} onClick={close}/>
 
     const headerInProgress =
         <>
-            <BackBtn onClick={prev}/>
+            <BackBtn data-testid={checkDevelopmentMode('header-back')} onClick={prev}/>
             <Counter>{progress}/{maxProgress}</Counter>
             {closeBtn}
         </>

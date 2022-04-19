@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react'
-import Widget from './Widget'
-import getDataSource from "../utils/getDataSource";
+import Widget from "./components/Widget";
+import getDataSource from "./utils/getDataSource";
 
 const App: FC = () => {
   const [isContainSource, setIsContainsSource] = useState<boolean>(false)

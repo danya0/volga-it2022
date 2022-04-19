@@ -11,6 +11,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {Genders} from "../../types/quizReducerTypes";
 import {OptionNames} from "../../quiz/quiz";
 import {CheckedArray, CheckedFunction} from "../../types/components";
+import {checkDevelopmentMode} from "../../utils/checkDevelopmentMode";
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -110,10 +111,6 @@ const QuizPlace = styled.div`
   `}
 `
 
-interface ISkipButton {
-    hide?: boolean
-}
-
 const SkipButton = styled.div`
   cursor: pointer;
   font-weight: bold;
@@ -125,8 +122,6 @@ const SkipButton = styled.div`
   text-decoration-line: underline;
 
   color: #3A4850;
-
-  display: ${(props: ISkipButton) => props.hide ? 'none' : 'block'};
 `
 
 interface IQuizEl {
@@ -158,7 +153,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         }
     }
 
-    // state that changes to false after 3 seconds of showing betweenPage
+    // state that changes to false after 2 seconds of showing betweenPage
     const [isBetweenPage, setIsBetweenPage] = useState(!!betweenPage)
     useEffect(() => {
         setIsBetweenPage(!!betweenPage)
@@ -235,6 +230,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                     {quiz.answers.map((answer: any, idx: number) => {
                         // check the gender type to substitute the correct picture
                         let image = answer.image
+                        console.log('image ->', image)
+                        console.log('gender ->', gender)
                         if (typeof answer.image === 'object') {
                             image = answer.image[gender]
                         }
@@ -247,6 +244,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                         if (checked) {
                             return (
                                 <QuizAnswerChecked
+                                    data-testid={checkDevelopmentMode(`answer-${idx+1}`)}
+
                                     key={idx}
                                     answer={answerWithImage}
                                     onClick={checkedF}
@@ -257,6 +256,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                         } else {
                             return (
                                 <QuizAnswer
+                                    data-testid={checkDevelopmentMode(`answer-${idx+1}`)}
+
                                     key={idx}
                                     oneRow={oneRow}
                                     answer={answerWithImage}
@@ -289,13 +290,15 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                     Continue
                 </Button> : null}
 
-            <SkipButton
-                hide={!quiz.underText}
-                onClick={() => generateResponse(quizOptionName, null, !!quiz.doNotShowInReplies
-                )}
-            >
-                {quiz.underText}
-            </SkipButton>
+            {quiz.underText && (
+                <SkipButton
+                    data-testid={checkDevelopmentMode('skip-btn')}
+                    onClick={() => generateResponse(quizOptionName, null, !!quiz.doNotShowInReplies
+                    )}
+                >
+                    {quiz.underText}
+                </SkipButton>
+            )}
         </StyledQuiz>
     )
 

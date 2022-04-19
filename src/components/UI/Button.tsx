@@ -71,6 +71,8 @@ const Button: FC<ButtonProps> = ({children, inactive, xPadding, onClick, ...prop
     return (
         <StyledButton
             inactive={inactive}
+            disabled={inactive}
+
             xPadding={xPadding}
             data-text={children}
             onClick={!inactive ? onClick : null}

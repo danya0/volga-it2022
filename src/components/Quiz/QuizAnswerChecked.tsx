@@ -55,6 +55,7 @@ const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, onClick, children, .
           data-assurance={assurance}
           checked={checked}
           onClick={clickFunction}
+          {...props}
       >
         {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: !children})}
         {children ? <Text small={checkedType}>{children}</Text> : null}
