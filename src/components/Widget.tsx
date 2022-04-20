@@ -18,6 +18,7 @@ import objectCheck from "../utils/objectCheck";
 const StyledWidget = styled.div`
   margin: 0 auto;
   color: ${mainDarkColor};
+  background: #ffffff;
   max-width: 375px;
   border: 1px solid black;
   height: 638px;
