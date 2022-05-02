@@ -6,12 +6,12 @@ import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
-import {AnswerType, IAdditionalQuestion, IQuiz} from "../../types/quizTypes";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {Genders} from "../../types/quizReducerTypes";
-import {OptionNames} from "../../quiz/quiz";
-import {CheckedArray, CheckedFunction} from "../../types/components";
-import {checkDevelopmentMode} from "../../utils/checkDevelopmentMode";
+import {AnswerType, IAdditionalQuestion, IQuiz} from '../../types/quizTypes'
+import {useTypedSelector} from '../../hooks/useTypedSelector'
+import {Genders} from '../../types/quizReducerTypes'
+import {OptionNames} from '../../quiz/quiz'
+import {CheckedArray, CheckedFunction} from '../../types/components'
+import {checkDevelopmentMode} from '../../utils/checkDevelopmentMode'
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -130,6 +130,7 @@ interface IQuizEl {
 
 const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     const [quiz, setQuiz] = useState<IQuiz | IAdditionalQuestion | any>(quizFromProps)
+    const gender = useTypedSelector(state => state.quiz.gender)
     useEffect(() => {
         setQuiz(quizFromProps)
     }, [quizFromProps])
@@ -173,7 +174,6 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     }, [betweenPage, isBetweenPage, quiz])
 
     const dispatch = useDispatch()
-    const gender = useTypedSelector(state => state.quiz.gender)
     const quizOptionName = quiz.optionName
 
     const generateResponse = (key: string, answer: AnswerType, doNotShowInReplies: boolean) => {
@@ -190,8 +190,6 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         // quiz 1
         if (key === OptionNames.gender) {
             const gender: Genders = answer === 5 ? Genders.women : answer === 4 ? Genders.men : Genders.noGender
-            console.log('answer ->', answer)
-            console.log('gender ->', gender)
             dispatch(setGenderCreator(gender))
         }
 

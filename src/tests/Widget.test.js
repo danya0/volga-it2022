@@ -7,7 +7,6 @@ import userEvent from '@testing-library/user-event'
 import Widget from '../components/Widget'
 import {Genders} from '../types/quizReducerTypes'
 import {OptionNames} from '../quiz/quiz'
-import exp from 'constants'
 
 function renderWithRedux(
     ui,
