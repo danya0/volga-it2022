@@ -5,6 +5,7 @@ import likeSvg from '../img/likeWindow/like.svg'
 import star1 from '../img/likeWindow/star1.svg'
 import star2 from '../img/likeWindow/star2.svg'
 import Circle from './UI/Circle'
+import {withHomePage} from '../utils/withHomePage'
 
 const LikeWindowWrap = styled.div`
   display: flex;
@@ -51,17 +52,17 @@ const LikeWindow: FC = ({children}) => {
   return (
       <LikeWindowWrap>
         <Circle>
-          <Image bg={likeSvg}/>
+          <Image bg={withHomePage(likeSvg)}/>
           {/* little star 1 */}
           <Star style={{
             left: 31,
             top: 43
-          }} bg={star1}/>
+          }} bg={withHomePage(star1)}/>
           {/* little star 2 */}
           <Star style={{
             left: 74,
             top: 28
-          }} bg={star2}/>
+          }} bg={withHomePage(star2)}/>
         </Circle>
         <AccentTitle style={{
           fontSize: 24

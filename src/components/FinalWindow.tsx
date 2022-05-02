@@ -5,6 +5,7 @@ import giftSvg from '../img/finalWindow/gift.svg'
 import {StyledAccentTitle} from './UI/AccentTitle'
 import SubAccentTitle from './UI/SubAccentTitle'
 import Button from './UI/Button'
+import ImageWithHomePage from './ImageWithHomePage'
 
 const StyledFinalWindow = styled.div`
   position: relative;
@@ -49,23 +50,24 @@ interface FinalWindowProps {
 }
 
 const FinalWindow: FC<FinalWindowProps> = ({sendEvent}) => {
-  return (
-      <StyledFinalWindow>
-        <Circle style={{
-          marginBottom: 32
-        }}>
-          <GiftItem src={giftSvg} alt="gift"/>
-        </Circle>
-        <AccentTitle>We've found some awesome frames for you!</AccentTitle>
-        <SubAccentTitle style={{
-          marginBottom: 50,
-          lineHeight: '155%'
-        }}>Send the results to your email to receive special discounts.</SubAccentTitle>
-        <Button onClick={sendEvent} xPadding={70}>Send</Button>
+    return (
+        <StyledFinalWindow>
+            <Circle style={{
+                marginBottom: 32
+            }}>
+                <ImageWithHomePage How={GiftItem} src={giftSvg} alt="gift"/>
+            </Circle>
+            <AccentTitle>We've found some awesome frames for you!</AccentTitle>
+            <SubAccentTitle style={{
+                marginBottom: 50,
+                lineHeight: '155%'
+            }}>Send the results to your email to receive special discounts.</SubAccentTitle>
+            <Button onClick={sendEvent} xPadding={70}>Send</Button>
 
-        <Policy>By clicking ‘Send’ you agree to our Terms of Use & Privacy Policy and receiving promotion emails</Policy>
-      </StyledFinalWindow>
-  )
+            <Policy>By clicking ‘Send’ you agree to our Terms of Use & Privacy Policy and receiving promotion
+                emails</Policy>
+        </StyledFinalWindow>
+    )
 }
 
 export default FinalWindow

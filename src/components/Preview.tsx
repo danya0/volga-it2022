@@ -4,6 +4,7 @@ import {StyledAccentTitle} from './UI/AccentTitle'
 import PreviewImg from '../img/preview.png'
 import Button from './UI/Button'
 import SubAccentTitle from './UI/SubAccentTitle'
+import ImageWithHomePage from './ImageWithHomePage'
 
 const StyledPreview = styled.div`
   flex-grow: 1;
@@ -26,15 +27,16 @@ interface PreviewProps {
     startEvent: () => void
 }
 
-const Preview:FC<PreviewProps> = ({startEvent}) => {
-  return (
-      <StyledPreview>
-        <Image src={PreviewImg} alt="preview"/>
-        <ThisAccentTitle>Let’s find your perfect pair!</ThisAccentTitle>
-        <SubAccentTitle>Take the quiz to easily discover your perfect fit from thousands of styles</SubAccentTitle>
-        <Button onClick={startEvent}>Start Now</Button>
-      </StyledPreview>
-  )
+const Preview: FC<PreviewProps> = ({startEvent}) => {
+    return (
+        <StyledPreview>
+            <ImageWithHomePage How={Image} src={PreviewImg} alt="preview"/>
+            {/*<Image src={PreviewImg} alt="preview"/>*/}
+            <ThisAccentTitle>Let’s find your perfect pair!</ThisAccentTitle>
+            <SubAccentTitle>Take the quiz to easily discover your perfect fit from thousands of styles</SubAccentTitle>
+            <Button onClick={startEvent}>Start Now</Button>
+        </StyledPreview>
+    )
 }
 
 export default Preview

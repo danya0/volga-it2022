@@ -1,6 +1,7 @@
 import React, {FC} from 'react'
 import styled, {css} from 'styled-components'
 import {IAnswerWithStringImage} from "../../types/quizTypes"
+import ImageWithHomePage from '../ImageWithHomePage'
 
 interface IStyledQuizAnswer {
     oneRow?: any;
@@ -93,7 +94,7 @@ export const checkImageAndInsertEl = (imgItem?: string, props?: any, alt?: strin
         <StyledQuizImage
             {...props}
         >
-            <img src={imgItem} alt={alt ? alt : "quiz-answer"}/>
+            <ImageWithHomePage src={imgItem} alt={alt ? alt : 'quiz-answer'}/>
         </StyledQuizImage>
         :
         null

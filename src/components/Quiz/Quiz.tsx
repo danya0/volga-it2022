@@ -12,6 +12,7 @@ import {Genders} from '../../types/quizReducerTypes'
 import {OptionNames} from '../../quiz/quiz'
 import {CheckedArray, CheckedFunction} from '../../types/components'
 import {checkDevelopmentMode} from '../../utils/checkDevelopmentMode'
+import ImageWithHomePage from '../ImageWithHomePage'
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -218,7 +219,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                 {quiz.title}
             </QuizTitle>
             {quiz.subtitle ? <QuizSubtitle mb={checked}>{quiz.subtitle}</QuizSubtitle> : null}
-            {quiz.image ? <QuizImage src={quiz.image} alt="quiz-image"/> : null}
+            {quiz.image ? <ImageWithHomePage How={QuizImage} src={quiz.image} alt="quiz-image"/> : null}
             <QuizPlaceWrap
                 // creates negative margin padding
                 grid={checked}

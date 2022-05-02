@@ -4,6 +4,7 @@ import styled, {css} from 'styled-components'
 import assurance from '../../img/assurance.svg'
 import {IAnswerWithStringImage} from "../../types/quizTypes";
 import {CheckedFunction} from "../../types/components";
+import ImageWithHomePage from '../ImageWithHomePage'
 
 interface ICheckedAnswer {
   checked?: boolean
@@ -42,7 +43,7 @@ const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, onClick, children, .
   const checkedType = true
 
   const flag = checked ? (<Flag>
-    <img src={assurance} alt="checked"/>
+    <ImageWithHomePage src={assurance} alt="checked"/>
   </Flag>) : null
 
   const clickFunction = () => {

@@ -6,6 +6,7 @@ import close from '../img/exit.svg'
 import logo from '../img/logo.png'
 import ProgressBar from './UI/ProgressBar'
 import {checkDevelopmentMode} from '../utils/checkDevelopmentMode'
+import ImageWithHomePage from './ImageWithHomePage'
 
 const HeaderWrap = styled.div`
   display: flex;
@@ -77,7 +78,7 @@ const Header: FC<HeaderProps> = ({progress, maxProgress, close, prev}) => {
 
     const header =
         <>
-            <img src={logo} alt="logo"/>
+            <ImageWithHomePage src={logo} alt="logo"/>
             {isFinal ? closeBtn : <ToRightBtn/>}
         </>
 
