@@ -1,1 +1,1 @@
-export const homepage = 'https://danya0.github.io/volga-it2022'
+export const homepage = 'https://danya0.github.io'

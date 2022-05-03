@@ -1,6 +1,5 @@
 import {quizImages} from './quizImages'
 import {IQuiz} from "../types/quizTypes";
-import {Genders} from "../types/quizReducerTypes";
 
 export enum OptionNames {
     gender = 'gender',

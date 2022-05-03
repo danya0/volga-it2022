@@ -7,13 +7,14 @@ import logo from '../img/logo.png'
 import ProgressBar from './UI/ProgressBar'
 import {checkDevelopmentMode} from '../utils/checkDevelopmentMode'
 import ImageWithHomePage from './ImageWithHomePage'
+import {withHomePage} from '../utils/withHomePage'
 
 const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 80px;
   flex-shrink: 0;
-  
+
   & * > {
     width: 100%;
   }
@@ -36,11 +37,11 @@ const StyledBtn = styled.div`
 const BackBtn = styled(StyledBtn)`
   width: 8.5px;
   height: 14px;
-  background-image: url(${backArrow});
+  background-image: url(${withHomePage(backArrow)});
 `
 
 const ToRightBtn = styled(StyledBtn)`
-  background-image: url(${nextArrow});
+  background-image: url(${withHomePage(nextArrow)});
   width: 11px;
   height: 18px;
 `
@@ -48,7 +49,7 @@ const ToRightBtn = styled(StyledBtn)`
 const CloseBtn = styled(StyledBtn)`
   width: 13.79px;
   height: 13.61px;
-  background-image: url(${close});
+  background-image: url(${withHomePage(close)});
 `
 
 const Counter = styled.div`
@@ -87,7 +88,7 @@ const Header: FC<HeaderProps> = ({progress, maxProgress, close, prev}) => {
             <StyledHeader>
                 {progress < 0 || isFinal ? header : headerInProgress}
             </StyledHeader>
-            { progress > 0 ? <ProgressBar current={progress} max={maxProgress}/> : null}
+            {progress > 0 ? <ProgressBar current={progress} max={maxProgress}/> : null}
         </HeaderWrap>
     )
 }

@@ -53,6 +53,7 @@ export const Text = styled.p<IText>`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
+  text-align: center;
 
   ${(props: IText) => props.small ? css`
     font-size: 13.72px;
