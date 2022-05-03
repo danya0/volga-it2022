@@ -130,7 +130,7 @@ interface IQuizEl {
 }
 
 const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
-    const [quiz, setQuiz] = useState<IQuiz | IAdditionalQuestion | any>(quizFromProps)
+    const [quiz, setQuiz] = useState<IQuiz | IAdditionalQuestion>(quizFromProps)
     const gender = useTypedSelector(state => state.quiz.gender)
     useEffect(() => {
         setQuiz(quizFromProps)
@@ -143,7 +143,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     // variable to display 'between page'
     const betweenPage = quiz.previewPageTitle
     // a variable that keeps track of whether there is an additional question
-    const additionalQuestion = quiz.additionalQuestion
+    const additionalQuestion = (quiz as IQuiz).additionalQuestion
 
     const [checkedAr, setCheckedAr] = useState<CheckedArray>([])
     const checkedF: CheckedFunction = (id, checked) => {
@@ -175,7 +175,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     }, [betweenPage, isBetweenPage, quiz])
 
     const dispatch = useDispatch()
-    const quizOptionName = quiz.optionName
+    const quizOptionName = (quiz as IQuiz).optionName
 
     const generateResponse = (key: string, answer: AnswerType, doNotShowInReplies: boolean) => {
 
@@ -183,7 +183,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         if (additionalQuestion && answer === additionalQuestion.answerId) {
             setQuiz({
                 ...additionalQuestion,
-                optionName: quiz.optionName,
+                optionName: (quiz as IQuiz).optionName,
             })
             return
         }
