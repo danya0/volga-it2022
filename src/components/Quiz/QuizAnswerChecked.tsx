@@ -34,7 +34,8 @@ const Flag = styled.div`
 
 interface IQuizAnswerChecked {
   answer: IAnswerWithStringImage,
-  onClick: CheckedFunction
+  onClick: CheckedFunction,
+  [key: string]: any
 }
 
 const QuizAnswerChecked: FC<IQuizAnswerChecked> = ({answer, onClick, children, ...props}) => {

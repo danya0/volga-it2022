@@ -10,9 +10,10 @@ import {AnswerType, IAdditionalQuestion, IQuiz} from '../../types/quizTypes'
 import {useTypedSelector} from '../../hooks/useTypedSelector'
 import {Genders} from '../../types/quizReducerTypes'
 import {OptionNames} from '../../quiz/quiz'
-import {CheckedArray, CheckedFunction} from '../../types/components'
+import {CheckedArray, CheckedFunction, GenerateResponse} from '../../types/components'
 import {checkDevelopmentMode} from '../../utils/checkDevelopmentMode'
 import ImageWithHomePage from '../ImageWithHomePage'
+import QuizPlace from './QuizPlace'
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -67,7 +68,7 @@ const QuizImage = styled.img`
   margin-bottom: 35px;
 `
 
-interface IQuizGrid {
+export interface IQuizGrid {
     grid?: boolean
 }
 
@@ -83,33 +84,6 @@ const QuizPlaceWrap = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`
-
-const QuizPlace = styled.div`
-  flex-grow: 1;
-
-  ${(props: IQuizGrid) => !props.grid ? css`
-    max-height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    & > * {
-      flex-grow: 1;
-      margin-bottom: 15px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  ` : css`
-    padding: 15px 12px 0 12px;
-    height: fit-content;
-    width: fit-content;
-    display: grid;
-    grid-template: repeat(3, 103px) / repeat(3, 160px);
-    grid-gap: 10px;
-  `}
 `
 
 const SkipButton = styled.div`
@@ -177,7 +151,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     const dispatch = useDispatch()
     const quizOptionName = (quiz as IQuiz).optionName
 
-    const generateResponse = (key: string, answer: AnswerType, doNotShowInReplies: boolean) => {
+    const generateResponse: GenerateResponse = (key: string, answer: AnswerType, doNotShowInReplies: boolean) => {
 
         // check additionalQuestion
         if (additionalQuestion && answer === additionalQuestion.answerId) {
@@ -223,54 +197,11 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
             <QuizPlaceWrap
                 // creates negative margin padding
                 grid={checked}
+                onScroll={(e: any) => {
+                    console.log('e ->', e)
+                }}
             >
-                <QuizPlace
-                    // display: grid (To display 'checked' elements)
-                    grid={checked}
-                >
-                    {quiz.answers.map((answer: any, idx: number) => {
-                        // check the gender type to substitute the correct picture
-                        let image = answer.image
-                        if (typeof answer.image === 'object') {
-                            image = answer.image[gender]
-                        }
-                        const answerWithImage = {
-                            ...answer,
-                            image
-                        }
-
-                        // depending on the type of question, select the correct element
-                        if (checked) {
-                            return (
-                                <QuizAnswerChecked
-                                    data-testid={checkDevelopmentMode(`answer-${idx+1}`)}
-
-                                    key={idx}
-                                    answer={answerWithImage}
-                                    onClick={checkedF}
-                                >
-                                    {answer.name}
-                                </QuizAnswerChecked>
-                            )
-                        } else {
-                            return (
-                                <QuizAnswer
-                                    data-testid={checkDevelopmentMode(`answer-${idx+1}`)}
-
-                                    key={idx}
-                                    oneRow={oneRow}
-                                    answer={answerWithImage}
-                                    onClick={() => {
-                                        generateResponse(quizOptionName, answer.id, !!quiz.doNotShowInReplies
-                                        )
-                                    }}
-                                >
-                                    {answer.name}
-                                </QuizAnswer>
-                            )
-                        }
-                    })}
-                </QuizPlace>
+                <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender} checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
             </QuizPlaceWrap>
 
             {checked ?

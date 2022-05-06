@@ -23,10 +23,6 @@ export const StyledQuizAnswer = styled.div<IStyledQuizAnswer>`
 
   transition: transform .3s;
 
-  &:hover {
-    transform: scale(1.05);
-  }
-
   ${(props: IStyledQuizAnswer) => props.oneRow ? css`
     flex-direction: row;
     align-items: center;

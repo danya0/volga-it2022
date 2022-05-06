@@ -311,6 +311,21 @@ export const quiz: IQuiz[] = [
                 name: 'Rectangle',
                 image: quizImages.quiz8.fs1
             },
+            {
+                id: 'rectangle_10',
+                name: 'Rectangle',
+                image: quizImages.quiz8.fs1
+            },
+            {
+                id: 'rectangle_11',
+                name: 'Rectangle',
+                image: quizImages.quiz8.fs1
+            },
+            {
+                id: 'rectangle_12',
+                name: 'Rectangle',
+                image: quizImages.quiz8.fs1
+            },
         ]
     },
 
