@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
 import QuizAnswer from './QuizAnswer'
 import Button from '../UI/Button'
@@ -106,6 +106,7 @@ interface IQuizEl {
 const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     const [quiz, setQuiz] = useState<IQuiz | IAdditionalQuestion>(quizFromProps)
     const gender = useTypedSelector(state => state.quiz.gender)
+    const quizWrapRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         setQuiz(quizFromProps)
     }, [quizFromProps])
@@ -178,6 +179,30 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         dispatch(nextQuizCreator())
     }
 
+    let coordinateY = 0
+    const quizWrapWheel = (e: any) => {
+        const deltaY = e.deltaY
+        const scrollWidth = quizWrapRef.current!.scrollWidth
+
+        if (e.deltaX !== 0 || e.deltaX !== -0) {
+            return
+        }
+
+        if (coordinateY < 0) {
+            coordinateY = 0
+        }
+        if (coordinateY > scrollWidth) {
+            coordinateY = scrollWidth
+        }
+
+        if (quizWrapRef.current) {
+            if (coordinateY <= quizWrapRef.current.scrollWidth && coordinateY >= 0) {
+                coordinateY += deltaY
+            }
+            quizWrapRef.current.scroll(coordinateY, 0)
+        }
+    }
+
     // xml parts
     const betweenPageXML = <LikeWindow>{betweenPage}</LikeWindow>
 
@@ -197,9 +222,8 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
             <QuizPlaceWrap
                 // creates negative margin padding
                 grid={checked}
-                onScroll={(e: any) => {
-                    console.log('e ->', e)
-                }}
+                ref={quizWrapRef}
+                onWheel={quizWrapWheel}
             >
                 <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender} checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
             </QuizPlaceWrap>
@@ -213,8 +237,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                     inactive={!checkedAr.length}
                     onClick={() => {
                         setCheckedAr([])
-                        generateResponse(quizOptionName, checkedAr, !!quiz.doNotShowInReplies
-                        )
+                        generateResponse(quizOptionName, checkedAr, !!quiz.doNotShowInReplies)
                     }}
                 >
                     Continue
@@ -223,8 +246,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
             {quiz.underText && (
                 <SkipButton
                     data-testid={checkDevelopmentMode('skip-btn')}
-                    onClick={() => generateResponse(quizOptionName, null, !!quiz.doNotShowInReplies
-                    )}
+                    onClick={() => generateResponse(quizOptionName, null, !!quiz.doNotShowInReplies)}
                 >
                     {quiz.underText}
                 </SkipButton>

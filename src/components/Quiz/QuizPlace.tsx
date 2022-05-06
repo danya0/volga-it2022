@@ -51,9 +51,6 @@ const QuizPlace: FC<IQuizPlace> = ({checked, quiz, gender, checkedF, oneRow, gen
         <StyledQuizPlace
             // display: grid (To display 'checked' elements)
             grid={checked}
-            onScroll={(e: any) => {
-                console.log('e ->', e)
-            }}
         >
             {quiz.answers.map((answer: any, idx: number) => {
                 // check the gender type to substitute the correct picture
