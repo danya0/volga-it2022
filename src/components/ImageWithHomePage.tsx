@@ -11,7 +11,7 @@ const ImageWithHomePage: FC<ImageProps> = ({How, src, alt}) => {
     const link = withHomePage(src)
     return (
         <>
-            {How ? <How alt={alt} src={link}/> : <img alt={alt} src={link}/>}
+            {How ? <How alt={alt} src={link} loading={'lazy'}/> : <img alt={alt} src={link} loading={'lazy'}/>}
         </>
     )
 }

@@ -179,28 +179,17 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         dispatch(nextQuizCreator())
     }
 
-    let coordinateY = 0
-    const quizWrapWheel = (e: any) => {
-        const deltaY = e.deltaY
-        const scrollWidth = quizWrapRef.current!.scrollWidth
+    // verticalToHorizontalScroll
+    useEffect(() => {
+        quizWrapRef.current!.scrollLeft = 0
+    }, [quiz])
 
+    const verticalToHorizontalScroll = (e: any) => {
         if (e.deltaX !== 0 || e.deltaX !== -0) {
             return
         }
 
-        if (coordinateY < 0) {
-            coordinateY = 0
-        }
-        if (coordinateY > scrollWidth) {
-            coordinateY = scrollWidth
-        }
-
-        if (quizWrapRef.current) {
-            if (coordinateY <= quizWrapRef.current.scrollWidth && coordinateY >= 0) {
-                coordinateY += deltaY
-            }
-            quizWrapRef.current.scroll(coordinateY, 0)
-        }
+        quizWrapRef.current!.scroll(quizWrapRef.current!.scrollLeft + e.deltaY, 0)
     }
 
     // xml parts
@@ -223,9 +212,10 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                 // creates negative margin padding
                 grid={checked}
                 ref={quizWrapRef}
-                onWheel={quizWrapWheel}
+                onWheel={checked ? verticalToHorizontalScroll : undefined}
             >
-                <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender} checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
+                <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender}
+                           checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
             </QuizPlaceWrap>
 
             {checked ?
