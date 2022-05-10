@@ -267,64 +267,64 @@ export const quiz: IQuiz[] = [
         },
         answers: [
             {
-                id: 'rectangle_1',
+                id: 'rectangle',
                 name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                image: quizImages.quiz8.rectangle
             },
             {
-                id: 'rectangle_2',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'wayframe',
+                name: 'Wayframe',
+                image: quizImages.quiz8.wayframe
             },
             {
-                id: 'rectangle_3',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'cat_eye',
+                name: 'Cat Eye',
+                image: quizImages.quiz8.cat_eye
             },
             {
-                id: 'rectangle_4',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'browline',
+                name: 'Browline',
+                image: quizImages.quiz8.browline
             },
             {
-                id: 'rectangle_5',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'round',
+                name: 'Round',
+                image: quizImages.quiz8.round
             },
             {
-                id: 'rectangle_6',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'rimless',
+                name: 'Rimless',
+                image: quizImages.quiz8.rimless
             },
             {
-                id: 'rectangle_7',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'aviator',
+                name: 'Aviator',
+                image: quizImages.quiz8.aviator
             },
             {
-                id: 'rectangle_8',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'oval',
+                name: 'Oval',
+                image: quizImages.quiz8.oval
             },
             {
-                id: 'rectangle_9',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'square',
+                name: 'Squzre',
+                image: quizImages.quiz8.square
             },
             {
-                id: 'rectangle_10',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'geometric',
+                name: 'Geometric',
+                image: quizImages.quiz8.geometric
             },
             {
-                id: 'rectangle_11',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'oversized',
+                name: 'Oversized',
+                image: quizImages.quiz8.oversized
             },
             {
-                id: 'rectangle_12',
-                name: 'Rectangle',
-                image: quizImages.quiz8.fs1
+                id: 'wrap',
+                name: 'Wrap',
+                image: quizImages.quiz8.wrap
             },
         ]
     },
@@ -360,40 +360,52 @@ export const quiz: IQuiz[] = [
         },
         answers: [
             {
-                id: 'brand_1',
-                image: quizImages.quiz10.brand1
+                id: 'ray_ban',
+                image: quizImages.quiz10.ray_ban
             },
             {
-                id: 'brand_2',
-                image: quizImages.quiz10.brand1
+                id: 'hilary_duff',
+                image: quizImages.quiz10.hilary_duff
             },
             {
-                id: 'brand_3',
-                image: quizImages.quiz10.brand1
+                id: 'michael_kors',
+                image: quizImages.quiz10.michael_kors
             },
             {
-                id: 'brand_4',
-                image: quizImages.quiz10.brand1
+                id: 'oakley',
+                image: quizImages.quiz10.oakley
             },
             {
-                id: 'brand_5',
-                image: quizImages.quiz10.brand1
+                id: 'prada',
+                image: quizImages.quiz10.prada
             },
             {
-                id: 'brand_6',
-                image: quizImages.quiz10.brand1
+                id: 'coach',
+                image: quizImages.quiz10.coach
             },
             {
-                id: 'brand_7',
-                image: quizImages.quiz10.brand1
+                id: 'gucci',
+                image: quizImages.quiz10.gucci
             },
             {
-                id: 'brand_8',
-                image: quizImages.quiz10.brand1
+                id: 'versace',
+                image: quizImages.quiz10.versace
             },
             {
-                id: 'brand_9',
-                image: quizImages.quiz10.brand1
+                id: 'tory_burch',
+                image: quizImages.quiz10.tory_burch
+            },
+            {
+                id: 'armani_exchange',
+                image: quizImages.quiz10.armani_exchange
+            },
+            {
+                id: 'vogue',
+                image: quizImages.quiz10.vogue
+            },
+            {
+                id: 'burberry',
+                image: quizImages.quiz10.burberry
             },
         ]
     },

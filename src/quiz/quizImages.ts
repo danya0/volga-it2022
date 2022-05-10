@@ -23,9 +23,31 @@ import nogenBetween from '../img/quiz6/nogen_between.svg'
 import nogenLong from '../img/quiz6/nogen_long.svg'
 import nogenRound from '../img/quiz6/nogen_round.svg'
 // quiz 8
-import fs1 from '../img/quiz8/Bitmap.png'
+import rectangle from '../img/quiz8/Bitmap.png'
+import aviator from '../img/quiz8/aviator.png'
+import browline from '../img/quiz8/browline.png'
+import cat_eye from '../img/quiz8/cat_eye.png'
+import geometric from '../img/quiz8/geometric.png'
+import oversized from '../img/quiz8/oversized.png'
+import oval from '../img/quiz8/oval.png'
+import rimless from '../img/quiz8/rimless.png'
+import round from '../img/quiz8/round.png'
+import square from '../img/quiz8/square.png'
+import wayframe from '../img/quiz8/wayframe.png'
+import wrap from '../img/quiz8/wrap.png'
 // quiz 10
-import brand1 from '../img/quiz10/ray-ban.png'
+import ray_ban from '../img/quiz10/ray-ban.png'
+import armani_exchange from '../img/quiz10/armani_exchange.png'
+import burberry from '../img/quiz10/burberry.png'
+import coach from '../img/quiz10/coach.png'
+import gucci from '../img/quiz10/gucci.png'
+import hilary_duff from '../img/quiz10/hilary_duff.png'
+import michael_kors from '../img/quiz10/michael_kors.png'
+import oakley from '../img/quiz10/oakley.png'
+import prada from '../img/quiz10/prada.png'
+import tory_burch from '../img/quiz10/tory_burch.png'
+import versace from '../img/quiz10/versace.png'
+import vogue from '../img/quiz10/vogue.png'
 import {IQuizImage} from "../types/quizTypes";
 
 export const quizImages: IQuizImage = {
@@ -34,6 +56,6 @@ export const quizImages: IQuizImage = {
   quiz4: {frameSize},
   quiz5: {darkShade, lightShade, transitionShade},
   quiz6: {menBetween, menLong, menRound, womenBetween, womenLong, womenRound, nogenBetween, nogenLong, nogenRound},
-  quiz8: {fs1},
-  quiz10: {brand1}
+  quiz8: {rectangle, aviator, browline, cat_eye, geometric, oversized, oval, rimless, round, square, wayframe, wrap},
+  quiz10: {ray_ban, armani_exchange, burberry, coach, gucci, hilary_duff, michael_kors, oakley, prada, tory_burch, versace, vogue}
 }
