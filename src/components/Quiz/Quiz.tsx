@@ -181,7 +181,9 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
     // verticalToHorizontalScroll
     useEffect(() => {
-        quizWrapRef.current!.scrollLeft = 0
+        if (quizWrapRef.current) {
+            quizWrapRef.current!.scrollLeft = 0
+        }
     }, [quiz])
 
     const verticalToHorizontalScroll = (e: any) => {
