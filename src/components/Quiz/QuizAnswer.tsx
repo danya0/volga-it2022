@@ -43,13 +43,14 @@ export const StyledQuizAnswer = styled.div<IStyledQuizAnswer>`
 
 interface IText {
     small?: boolean
+    leftAlign?: boolean
 }
 
 export const Text = styled.p<IText>`
   font-weight: 600;
   font-size: 18px;
   line-height: 25px;
-  text-align: center;
+  text-align: ${(props: IText) => props.leftAlign ? 'left' : 'center'};
 
   ${(props: IText) => props.small ? css`
     font-size: 13.72px;
@@ -120,7 +121,7 @@ const QuizAnswer: FC<IQuizAnswer> = ({answer, oneRow, children, onClick, ...prop
         >
             {checkImageAndInsertEl(image, {smallBottom: checkedType && !!children, noMargin: oneRow || !children}, `${children}` || oneRowText)}
             {oneRow && !oneRowText ? <Divider/> : null}
-            {children ? <Text small={checkedType}>{children}</Text> : null}
+            {children ? <Text leftAlign={oneRow} small={checkedType}>{children}</Text> : null}
             {oneRowText ? <OneRowText>{oneRowText}</OneRowText> : null}
         </StyledQuizAnswer>
     )

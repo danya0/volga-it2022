@@ -38,7 +38,7 @@ export const quiz: IQuiz[] = [
     {
         quizId: 2,
         optionName: OptionNames.eyewear_type,
-        title: 'What type of glasses are you looking for?',
+        title: 'What type of glasses are<br> you looking for?',
         answers: [
             {
                 id: 210,
@@ -80,7 +80,7 @@ export const quiz: IQuiz[] = [
         underText: 'I want to see both',
         additionalQuestion: {
             answerId: true,
-            title: 'What type of glasses are you looking for?',
+            title: 'What do you need your glasses for?',
             answers: [
                 {
                     id: 6,
@@ -102,7 +102,7 @@ export const quiz: IQuiz[] = [
     {
         quizId: 4,
         optionName: OptionNames.frame_size,
-        title: 'What’s your current frame size?',
+        title: 'What’s your current<br> frame size?',
         image: quizImages.quiz4.frameSize,
         answerOptions: {
             oneRow: true
@@ -128,7 +128,7 @@ export const quiz: IQuiz[] = [
         additionalQuestion: {
             answerId: null,
             previewPageTitle: 'No worries, we’ve got you!',
-            title: 'How wide would you say your face is?',
+            title: 'How wide would you<br> say your face is?',
             answers: [
                 {
                     id: 66,
@@ -154,7 +154,7 @@ export const quiz: IQuiz[] = [
         },
         quizId: 5,
         optionName: OptionNames.blue_light,
-        title: 'Would you like to protect your eyes from light emanating from screens?',
+        title: 'Would you like to protect your eyes<br> from light emanating from screens?',
         answers: [
             {
                 id: true,
@@ -174,7 +174,7 @@ export const quiz: IQuiz[] = [
         },
         quizId: 5,
         optionName: OptionNames.shade,
-        title: 'When you’re out and about, which shade of lenses do you prefer?',
+        title: 'When you’re out and about, which<br> shade of lenses do you prefer?',
         answerOptions: {
             oneRow: true
         },
@@ -200,7 +200,7 @@ export const quiz: IQuiz[] = [
     {
         quizId: 6,
         optionName: OptionNames.face_shape,
-        title: 'Every face shape has a perfect fit. What’s yours?',
+        title: 'Every face shape has a<br> perfect fit. What’s yours?',
         answerOptions: {
             oneRow: true
         },
@@ -239,7 +239,7 @@ export const quiz: IQuiz[] = [
     {
         quizId: 7,
         optionName: OptionNames.facial_features,
-        title: 'How would you define your facial features?',
+        title: 'How would you define<br> your facial features?',
         answers: [
             {
                 id: 'sharp',
@@ -333,7 +333,7 @@ export const quiz: IQuiz[] = [
         quizId: 9,
         doNotShowInReplies: true,
         optionName: OptionNames.particular_brands,
-        title: 'Are you looking for any particular eyewear brands?',
+        title: 'Are you looking for any<br> particular eyewear brands?',
         answers: [
             {
                 id: 1,

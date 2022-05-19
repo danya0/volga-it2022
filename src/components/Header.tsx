@@ -12,7 +12,7 @@ import {withHomePage} from '../utils/withHomePage'
 const HeaderWrap = styled.div`
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 65px;
   flex-shrink: 0;
 
   & * > {

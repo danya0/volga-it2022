@@ -1,8 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
 import styled, {css} from 'styled-components'
-import QuizAnswer from './QuizAnswer'
-import Button from '../UI/Button'
-import QuizAnswerChecked from './QuizAnswerChecked'
 import {useDispatch} from 'react-redux'
 import {nextQuizCreator, pushAnswerCreator, setGenderCreator} from '../../store/quizReducer'
 import LikeWindow from '../LikeWindow'
@@ -14,6 +11,7 @@ import {CheckedArray, CheckedFunction, GenerateResponse} from '../../types/compo
 import {checkDevelopmentMode} from '../../utils/checkDevelopmentMode'
 import ImageWithHomePage from '../ImageWithHomePage'
 import QuizPlace from './QuizPlace'
+import QuizCheckedButton from './QuizCheckedButton'
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -25,7 +23,7 @@ const QuizTitle = styled.h3<IQuizTitle>`
   font-size: 20px;
   line-height: 30px;
   text-align: center;
-  margin-bottom: ${(props: IQuizTitle) => props.withSubtitle ? '10px' : '20px'};
+  margin-bottom: ${(props: IQuizTitle) => props.withSubtitle ? '10px' : '32px'};
 `
 
 interface IQuizSubtitle {
@@ -52,14 +50,7 @@ const StyledQuiz = styled.div`
   flex-direction: column;
   padding-top: ${(props: IStyledQuiz) => props.withSubtitle ? '30px' : '50px'};
   padding-bottom: 25px;
-  ${(props: IStyledQuiz) => {
-    const padding = props.ifChecked ? '13px' : props.twoAnswer ? '49px' : '30px'
-
-    return css`
-      padding-left: ${padding};
-      padding-right: ${padding};
-    `
-  }}
+  
   height: 100%;
   background: #F7F8F9;
 `
@@ -74,12 +65,19 @@ export interface IQuizGrid {
 
 const QuizPlaceWrap = styled.div`
   ${(props: IQuizGrid) => props.grid ? css`
-    margin: 0 -13px 0 -13px;
     display: block;
     overflow-x: scroll;
   ` : 'display: flex'};
   flex-grow: 1;
 
+  ${(props: any) => {
+    const padding = props.grid ? '0' : props.twoAnswer ? '49px' : '30px'
+
+    return css`
+      padding-left: ${padding};
+      padding-right: ${padding};
+    `
+  }}
 
   &::-webkit-scrollbar {
     display: none;
@@ -179,6 +177,11 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         dispatch(nextQuizCreator())
     }
 
+    const quizCheckedButtonClick = () => {
+        setCheckedAr([])
+        generateResponse(quizOptionName, checkedAr, !!quiz.doNotShowInReplies)
+    }
+
     // verticalToHorizontalScroll
     useEffect(() => {
         if (quizWrapRef.current) {
@@ -199,41 +202,44 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
     const quizXML = (
         <StyledQuiz
-            // if 'twoAnswer' or 'ifChecked' need to increase wrapper paddings
-            twoAnswer={quiz.answers.length <= 2}
-            ifChecked={checked}
+
             // change padding on top
             withSubtitle={quiz.subtitle}
         >
-            <QuizTitle withSubtitle={quiz.subtitle}>
-                {quiz.title}
+            <QuizTitle withSubtitle={quiz.subtitle} dangerouslySetInnerHTML={{__html: quiz.title}}>
+                {/*{quiz.title}*/}
             </QuizTitle>
-            {quiz.subtitle ? <QuizSubtitle mb={checked}>{quiz.subtitle}</QuizSubtitle> : null}
-            {quiz.image ? <ImageWithHomePage How={QuizImage} src={quiz.image} alt="quiz-image"/> : null}
+            {quiz.subtitle && <QuizSubtitle mb={checked}>{quiz.subtitle}</QuizSubtitle>}
+            {quiz.image && <ImageWithHomePage style={{padding: '0px 29px'}} How={QuizImage} src={quiz.image} alt="quiz-image"/>}
             <QuizPlaceWrap
+                // if 'twoAnswer' or 'ifChecked' need to increase wrapper paddings
+                twoAnswer={quiz.answers.length <= 2}
+                ifChecked={checked}
                 // creates negative margin padding
                 grid={checked}
                 ref={quizWrapRef}
                 onWheel={checked ? verticalToHorizontalScroll : undefined}
+
+                // functions that cancel page scroll if it is long
+                onMouseEnter={checked ? () => {
+                    document.querySelector('body')!.style.overflow = 'hidden'
+                } : null}
+                onMouseLeave={checked ? () => {
+                    document.querySelector('body')!.style.overflow = 'auto'
+                }: null}
             >
                 <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender}
                            checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
             </QuizPlaceWrap>
 
-            {checked ?
-                <Button
-                    style={{
-                        width: 181,
-                        margin: '0 auto 18px auto'
-                    }}
+            {checked &&
+                <QuizCheckedButton
                     inactive={!checkedAr.length}
-                    onClick={() => {
-                        setCheckedAr([])
-                        generateResponse(quizOptionName, checkedAr, !!quiz.doNotShowInReplies)
-                    }}
+                    onClick={quizCheckedButtonClick}
                 >
                     Continue
-                </Button> : null}
+                </QuizCheckedButton>
+            }
 
             {quiz.underText && (
                 <SkipButton
