@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import styled, {css} from 'styled-components'
-import {IAnswerWithStringImage} from "../../types/quizTypes"
-import ImageWithHomePage from '../ImageWithHomePage'
+import {IAnswerWithStringImage} from "../../../types/quizTypes"
+import ImageWithHomePage from '../../ImageWithHomePage'
 
 interface IStyledQuizAnswer {
     oneRow?: any;

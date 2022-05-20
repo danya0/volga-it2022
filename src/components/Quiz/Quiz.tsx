@@ -11,7 +11,10 @@ import {CheckedArray, CheckedFunction, GenerateResponse} from '../../types/compo
 import {checkDevelopmentMode} from '../../utils/checkDevelopmentMode'
 import ImageWithHomePage from '../ImageWithHomePage'
 import QuizPlace from './QuizPlace'
-import QuizCheckedButton from './QuizCheckedButton'
+import QuizCheckedButton from './buttons/QuizCheckedButton'
+import QuizCheckedArrowButton, {ArrowOrientation} from './buttons/QuizCheckedArrowButton'
+import {isMobileDevice} from '../../utils/isMobileDevice'
+import QuizPlaceWrap from './wraps/QuizPlaceWrap'
 
 interface IQuizTitle {
     withSubtitle?: string | boolean
@@ -50,38 +53,13 @@ const StyledQuiz = styled.div`
   flex-direction: column;
   padding-top: ${(props: IStyledQuiz) => props.withSubtitle ? '30px' : '50px'};
   padding-bottom: 25px;
-  
+
   height: 100%;
   background: #F7F8F9;
 `
 
 const QuizImage = styled.img`
   margin-bottom: 35px;
-`
-
-export interface IQuizGrid {
-    grid?: boolean
-}
-
-const QuizPlaceWrap = styled.div`
-  ${(props: IQuizGrid) => props.grid ? css`
-    display: block;
-    overflow-x: scroll;
-  ` : 'display: flex'};
-  flex-grow: 1;
-
-  ${(props: any) => {
-    const padding = props.grid ? '0' : props.twoAnswer ? '49px' : '30px'
-
-    return css`
-      padding-left: ${padding};
-      padding-right: ${padding};
-    `
-  }}
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `
 
 const SkipButton = styled.div`
@@ -103,7 +81,6 @@ interface IQuizEl {
 
 const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
     const [quiz, setQuiz] = useState<IQuiz | IAdditionalQuestion>(quizFromProps)
-    const gender = useTypedSelector(state => state.quiz.gender)
     const quizWrapRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         setQuiz(quizFromProps)
@@ -189,18 +166,10 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
         }
     }, [quiz])
 
-    const verticalToHorizontalScroll = (e: any) => {
-        if (e.deltaX !== 0 || e.deltaX !== -0) {
-            return
-        }
+    // jsx parts
+    const betweenPageJSX = <LikeWindow>{betweenPage}</LikeWindow>
 
-        quizWrapRef.current!.scroll(quizWrapRef.current!.scrollLeft + e.deltaY, 0)
-    }
-
-    // xml parts
-    const betweenPageXML = <LikeWindow>{betweenPage}</LikeWindow>
-
-    const quizXML = (
+    const quizJSX = (
         <StyledQuiz
 
             // change padding on top
@@ -210,27 +179,11 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
                 {/*{quiz.title}*/}
             </QuizTitle>
             {quiz.subtitle && <QuizSubtitle mb={checked}>{quiz.subtitle}</QuizSubtitle>}
-            {quiz.image && <ImageWithHomePage style={{padding: '0px 29px'}} How={QuizImage} src={quiz.image} alt="quiz-image"/>}
-            <QuizPlaceWrap
-                // if 'twoAnswer' or 'ifChecked' need to increase wrapper paddings
-                twoAnswer={quiz.answers.length <= 2}
-                ifChecked={checked}
-                // creates negative margin padding
-                grid={checked}
-                ref={quizWrapRef}
-                onWheel={checked ? verticalToHorizontalScroll : undefined}
+            {quiz.image &&
+                <ImageWithHomePage style={{padding: '0px 29px'}} How={QuizImage} src={quiz.image} alt="quiz-image"/>}
 
-                // functions that cancel page scroll if it is long
-                onMouseEnter={checked ? () => {
-                    document.querySelector('body')!.style.overflow = 'hidden'
-                } : null}
-                onMouseLeave={checked ? () => {
-                    document.querySelector('body')!.style.overflow = 'auto'
-                }: null}
-            >
-                <QuizPlace quiz={quiz} quizOptionName={quizOptionName} checked={checked} gender={gender}
-                           checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}/>
-            </QuizPlaceWrap>
+            <QuizPlaceWrap quiz={quiz} checkedF={checkedF} oneRow={oneRow} generateResponse={generateResponse}
+                           quizOptionName={quizOptionName} checked={checked}/>
 
             {checked &&
                 <QuizCheckedButton
@@ -254,7 +207,7 @@ const Quiz: FC<IQuizEl> = ({quiz: quizFromProps}) => {
 
     return (
         <>
-            {isBetweenPage ? betweenPageXML : quizXML}
+            {isBetweenPage ? betweenPageJSX : quizJSX}
         </>
     )
 }

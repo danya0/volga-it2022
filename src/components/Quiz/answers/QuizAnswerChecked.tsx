@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react'
 import {checkImageAndInsertEl, StyledQuizAnswer, Text} from './QuizAnswer'
 import styled, {css} from 'styled-components'
-import assurance from '../../img/assurance.svg'
-import {IAnswerWithStringImage} from "../../types/quizTypes";
-import {CheckedFunction} from "../../types/components";
-import ImageWithHomePage from '../ImageWithHomePage'
+import assurance from '../../../img/assurance.svg'
+import {IAnswerWithStringImage} from "../../../types/quizTypes";
+import {CheckedFunction} from "../../../types/components";
+import ImageWithHomePage from '../../ImageWithHomePage'
 
 interface ICheckedAnswer {
   checked?: boolean

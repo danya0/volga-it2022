@@ -67,7 +67,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({progress, maxProgress, close, prev}) => {
     const isFinal = progress > maxProgress
 
-    // xml part
+    // jsx part
     const closeBtn = <CloseBtn data-testid={checkDevelopmentMode('header-close')} onClick={close}/>
 
     const headerInProgress =

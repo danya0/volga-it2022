@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import Button from '../UI/Button'
+import Button from '../../UI/Button'
 
 interface IQuizCheckedButton {
     inactive: boolean
