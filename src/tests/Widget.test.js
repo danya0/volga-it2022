@@ -130,7 +130,7 @@ describe('Test Widget component', () => {
                 await renderWithRedux(<Widget/>, preloadedState)
                 await waitForF()
                 await userEvent.click(screen.getByTestId('answer-1')) // Yes
-                expect(screen.getByText(/What type of glasses are you looking for/i)).toBeInTheDocument()
+                expect(screen.getByText(/What do you need your glasses for/i)).toBeInTheDocument()
             })
             test('Click 2 button && show next question', async () => {
                 await renderWithRedux(<Widget/>, preloadedState)
@@ -154,7 +154,8 @@ describe('Test Widget component', () => {
                     expect(screen.getByText(/Do you need vision correction/i)).toBeInTheDocument()
                 }, {timeout: 2001})
                 await userEvent.click(screen.getByTestId('answer-1'))
-                expect(screen.getByText(/What type of glasses are you looking for/i)).toBeInTheDocument()
+                screen.debug()
+                expect(screen.getByText(/What do you need your glasses for?/i)).toBeInTheDocument()
             }
 
             test('Render', async () => {
