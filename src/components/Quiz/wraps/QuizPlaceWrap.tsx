@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react'
+import React, {FC, useEffect, useRef, useState} from 'react'
 import QuizPlace from '../QuizPlace'
 import styled, {css} from 'styled-components'
 import {IAdditionalQuestion, IQuiz} from '../../../types/quizTypes'
@@ -6,6 +6,7 @@ import {useTypedSelector} from '../../../hooks/useTypedSelector'
 import {CheckedFunction, GenerateResponse} from '../../../types/components'
 import QuizCheckedArrowButton, {ArrowOrientation} from '../buttons/QuizCheckedArrowButton'
 import {isMobileDevice} from '../../../utils/isMobileDevice'
+import {log} from 'util'
 
 export interface IQuizGrid {
     grid?: boolean
@@ -57,6 +58,11 @@ const QuizPlaceWrap: FC<IQuizPlaceWrap> = ({quiz, checked, checkedF, oneRow, gen
     const quizWrapRef = useRef<HTMLDivElement>(null)
     const [showNextArrow, setShowNextArrow] = useState<boolean>(true)
     const [showPrewArrow, setShowPrewArrow] = useState<boolean>(false)
+
+    useEffect(() => {
+        setShowNextArrow(true)
+        setShowPrewArrow(false)
+    }, [quiz])
 
     const onScrollHandler = () => {
         const scrollLeft = quizWrapRef.current!.scrollLeft
