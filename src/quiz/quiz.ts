@@ -77,7 +77,7 @@ export const quiz: IQuiz[] = [
                 name: 'No'
             }
         ],
-        underText: 'I want to see both',
+        underText: 'Skip',
         additionalQuestion: {
             answerId: true,
             title: 'What do you need your glasses for?',
